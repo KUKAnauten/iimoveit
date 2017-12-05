@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find iiwa_moveit)/launch/run_move_group.launch" pass_all_args="true"/>
+</launch>
