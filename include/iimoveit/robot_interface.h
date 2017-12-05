@@ -35,9 +35,8 @@
 /* Author: Marcus Ebner */
 
 
-//TODO build library, test with sinfollowing
 //TODO publish trajectory, publish pose (cart/joint), start action, publish text
-//TODO documentation (doxygen + pdf)
+//TODO documentation (doxygen/rosdoc_lite)
 
 #ifndef IIMOVEIT_ROBOT_INTERFACE_H_
 #define IIMOVEIT_ROBOT_INTERFACE_H_
@@ -51,7 +50,7 @@ namespace iimoveit {
 namespace rvt = rviz_visual_tools;
 
 /**
- * Provides an easy to use interface to control the iiwa in combination with moveIt!.
+ * Provides an easy to use interface to control the iiwa in combination with MoveIt!.
  */
 class RobotInterface {
   public:
