@@ -1,0 +1,26 @@
+actions: []
+authors: Marcus Ebner <marcus.freiherr_ebner_von_eschenbach@stud.tu-darmstadt.de>
+brief: ''
+bugtracker: ''
+depends:
+- catkin
+- iiwa_description
+- moveit_msgs
+- moveit_visual_tools
+- iiwa_moveit
+- rospy
+- rosmsg
+- iiwa_msgs
+- control_msgs
+- actionlib
+- moveit_ros_planning_interface
+- roscpp
+description: A package providing a simple interface to accomplish tasks with an iiwa
+  and moveIt!
+license: BSD
+maintainers: Marcus Ebner <marcus.freiherr_ebner_von_eschenbach@stud.tu-darmstadt.de>
+msgs: []
+package_type: package
+repo_url: ''
+srvs: []
+url: ''
