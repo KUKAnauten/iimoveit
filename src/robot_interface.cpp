@@ -91,6 +91,10 @@ namespace iimoveit {
     visual_tools_.prompt("Continue with moving?");
   }
 
+  void RobotInterface::publishTrajectory(trajectory_msgs::JointTrajectory trajectory) {
+    trajectory_publisher_.publish(trajectory);
+  }
+
   void RobotInterface::updateRobotState() {
     robot_state_ = robot_state::RobotState(*move_group_.getCurrentState());
   }

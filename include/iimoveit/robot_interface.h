@@ -50,6 +50,7 @@ namespace rvt = rviz_visual_tools;
 
 /**
  * Provides an easy to use interface to control the iiwa in combination with MoveIt!.
+ * All public methods are virtual, so that derived classes can overwrite them in case they need modified versions.
  */
 class RobotInterface {
   public:
@@ -89,6 +90,13 @@ class RobotInterface {
    * Waits for the user to click 'Next' in RViz.
    */
   virtual void waitForApproval();
+
+  /**
+   * Publishes a joint trajectory to the command topic of the controller. This has to be used with care, as this method does
+   * not check whether the robot is close to the starting point of the trajectory.
+   * @param trajectory The trajectory to publish.
+   */
+  virtual void publishTrajectory(trajectory_msgs::JointTrajectory trajectory);
 
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
