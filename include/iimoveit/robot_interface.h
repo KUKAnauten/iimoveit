@@ -96,7 +96,16 @@ class RobotInterface {
    * not check whether the robot is close to the starting point of the trajectory.
    * @param trajectory The trajectory to publish.
    */
-  virtual void publishTrajectory(trajectory_msgs::JointTrajectory trajectory);
+  virtual void publishTrajectory(const trajectory_msgs::JointTrajectory& trajectory);
+
+  /**
+   * Publishes a Pose to the command topic of the controller. This has to be used with care, as this method does
+   * not check whether the robot is close to the starting point of the trajectory. As the command topic expects
+   * trajectory messages, the pose will be put in a trajectory containing this single pose.
+   * @param trajectory The trajectory to publish.
+   * @param duration The duration value of the trajectory message.
+   */
+  virtual void publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration);
 
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
