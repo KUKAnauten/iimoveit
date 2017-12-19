@@ -59,7 +59,7 @@ namespace iimoveit {
 
   void RobotInterface::planAndMove(geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired) {
     move_group_.setPoseTarget(target_pose);
-    bool success = move_group_.plan(movement_plan_);
+    bool success = (bool)move_group_.plan(movement_plan_);
     joint_names_ = movement_plan_.trajectory_.joint_trajectory.joint_names;
     ROS_INFO_NAMED("iiwa_test", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
     ROS_INFO_NAMED("iiwa_test", "Visualizing plan as trajectory line");
