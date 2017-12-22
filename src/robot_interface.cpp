@@ -34,16 +34,6 @@
 
 /* Author: Marcus Ebner */
 
-/*
-a1: -0.753815352917
-a2: 1.1734058857
-a3: 0.112757593393
-a4: -1.68315970898
-a5: -0.736448764801
-a6: -1.34951746464
-a7: 0.104109719396
-*/
-
 #include "iimoveit/robot_interface.h"
 
 namespace iimoveit {
@@ -125,9 +115,7 @@ namespace iimoveit {
   }
 
   std::vector<double> RobotInterface::getJointPositions() {
-    std::vector<double> jointPositions;
-    robot_state_.copyJointGroupPositions(joint_model_group_, jointPositions);
-    return std::move(jointPositions);
+    return move_group_.getCurrentJointValues();
   }
 
   geometry_msgs::PoseStamped RobotInterface::getPose(const std::string& end_effector_link) {
