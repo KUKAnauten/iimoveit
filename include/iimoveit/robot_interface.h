@@ -126,7 +126,7 @@ class RobotInterface {
    * Publishes a Pose to the command topic of the controller. This has to be used with care, as this method does
    * not check whether the robot is close to the starting point of the trajectory. As the command topic expects
    * trajectory messages, the pose will be put in a trajectory containing this single pose.
-   * @param trajectory The trajectory to publish.
+   * @param target_pose The pose to publish.
    * @param duration The duration value of the trajectory message.
    */
   virtual void publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration);
@@ -139,7 +139,7 @@ class RobotInterface {
 
   /**
    * Returns the current cartesian Pose.
-   * @param 
+   * @param end_effector_link Name of the endeffector link, if left empty, end effector link of planning group will be used.
    * @return Current Pose as geometry_msgs::PoseStamped.
    */
   geometry_msgs::PoseStamped getPose(const std::string& end_effector_link = "");

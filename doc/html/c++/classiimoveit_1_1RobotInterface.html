@@ -42,18 +42,36 @@
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a27e1ca285f7bb4cc1296b181ed1879a9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9">planAndMove</a> (geometry_msgs::Pose &amp;target_pose, const std::string &amp;pose_name, bool approvalRequired)</td></tr>
-<tr class="memdesc:a27e1ca285f7bb4cc1296b181ed1879a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans a motion to a given endeffector pose.  <a href="#a27e1ca285f7bb4cc1296b181ed1879a9">More...</a><br /></td></tr>
-<tr class="separator:a27e1ca285f7bb4cc1296b181ed1879a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5149e1abb0d572659a9145378706e505"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a5149e1abb0d572659a9145378706e505">planAndMove</a> (geometry_msgs::Pose &amp;target_pose, const std::string &amp;pose_name)</td></tr>
-<tr class="memdesc:a5149e1abb0d572659a9145378706e505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true.  <a href="#a5149e1abb0d572659a9145378706e505">More...</a><br /></td></tr>
-<tr class="separator:a5149e1abb0d572659a9145378706e505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a578b8ecaa9b25e9bc1680cb7c3929766"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a578b8ecaa9b25e9bc1680cb7c3929766">planAndMove</a> (geometry_msgs::Pose &amp;target_pose, bool approvalRequired)</td></tr>
-<tr class="memdesc:a578b8ecaa9b25e9bc1680cb7c3929766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where pose_name is set to 'given pose'.  <a href="#a578b8ecaa9b25e9bc1680cb7c3929766">More...</a><br /></td></tr>
-<tr class="separator:a578b8ecaa9b25e9bc1680cb7c3929766"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4b90cdeaa316e8e1d4d7e592bc203aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#af4b90cdeaa316e8e1d4d7e592bc203aa">planAndMove</a> (geometry_msgs::Pose &amp;target_pose)</td></tr>
-<tr class="memdesc:af4b90cdeaa316e8e1d4d7e592bc203aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true and pose_name is set to 'given pose'.  <a href="#af4b90cdeaa316e8e1d4d7e592bc203aa">More...</a><br /></td></tr>
-<tr class="separator:af4b90cdeaa316e8e1d4d7e592bc203aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f5757ab2404a4e059b42ec6662bd26f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a9f5757ab2404a4e059b42ec6662bd26f">getJointPositions</a> ()</td></tr>
+<tr class="memdesc:a9f5757ab2404a4e059b42ec6662bd26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current joint group positions.  <a href="#a9f5757ab2404a4e059b42ec6662bd26f">More...</a><br /></td></tr>
+<tr class="separator:a9f5757ab2404a4e059b42ec6662bd26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a4a53dcd1d77ce23c809778b21f716"><td class="memItemLeft" align="right" valign="top">geometry_msgs::PoseStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a09a4a53dcd1d77ce23c809778b21f716">getPose</a> (const std::string &amp;end_effector_link=&quot;&quot;)</td></tr>
+<tr class="memdesc:a09a4a53dcd1d77ce23c809778b21f716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current cartesian Pose.  <a href="#a09a4a53dcd1d77ce23c809778b21f716">More...</a><br /></td></tr>
+<tr class="separator:a09a4a53dcd1d77ce23c809778b21f716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b98653171f3926ba94af1e0534dac21"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21">planAndMove</a> (const geometry_msgs::Pose &amp;target_pose, const std::string &amp;pose_name, bool approvalRequired)</td></tr>
+<tr class="memdesc:a8b98653171f3926ba94af1e0534dac21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans a motion to a given endeffector pose.  <a href="#a8b98653171f3926ba94af1e0534dac21">More...</a><br /></td></tr>
+<tr class="separator:a8b98653171f3926ba94af1e0534dac21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8217c3f797f1d62abafc6d18f32dc63d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a8217c3f797f1d62abafc6d18f32dc63d">planAndMove</a> (const geometry_msgs::Pose &amp;target_pose, const std::string &amp;pose_name)</td></tr>
+<tr class="memdesc:a8217c3f797f1d62abafc6d18f32dc63d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true.  <a href="#a8217c3f797f1d62abafc6d18f32dc63d">More...</a><br /></td></tr>
+<tr class="separator:a8217c3f797f1d62abafc6d18f32dc63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48eb00a06021818553400cfd475d86ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a48eb00a06021818553400cfd475d86ab">planAndMove</a> (const geometry_msgs::Pose &amp;target_pose, bool approvalRequired)</td></tr>
+<tr class="memdesc:a48eb00a06021818553400cfd475d86ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where pose_name is set to 'given pose'.  <a href="#a48eb00a06021818553400cfd475d86ab">More...</a><br /></td></tr>
+<tr class="separator:a48eb00a06021818553400cfd475d86ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7fddab28560082a2b90fca84522bc7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a1e7fddab28560082a2b90fca84522bc7">planAndMove</a> (const geometry_msgs::Pose &amp;target_pose)</td></tr>
+<tr class="memdesc:a1e7fddab28560082a2b90fca84522bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true and pose_name is set to 'given pose'.  <a href="#a1e7fddab28560082a2b90fca84522bc7">More...</a><br /></td></tr>
+<tr class="separator:a1e7fddab28560082a2b90fca84522bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd0313f384c1c1038be006b045bd6303"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#abd0313f384c1c1038be006b045bd6303">planAndMove</a> (const std::vector&lt; double &gt; &amp;joint_group_positions, const std::string &amp;pose_name, bool approvalRequired)</td></tr>
+<tr class="memdesc:abd0313f384c1c1038be006b045bd6303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans a motion to a given joint space goal.  <a href="#abd0313f384c1c1038be006b045bd6303">More...</a><br /></td></tr>
+<tr class="separator:abd0313f384c1c1038be006b045bd6303"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e926d0ef6e5336d3f32d86e667d06e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a88e926d0ef6e5336d3f32d86e667d06e">planAndMove</a> (const std::vector&lt; double &gt; &amp;joint_group_positions, const std::string &amp;pose_name)</td></tr>
+<tr class="memdesc:a88e926d0ef6e5336d3f32d86e667d06e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true.  <a href="#a88e926d0ef6e5336d3f32d86e667d06e">More...</a><br /></td></tr>
+<tr class="separator:a88e926d0ef6e5336d3f32d86e667d06e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a673676c75a6e8dfff2cb06f9b6e9de7f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a673676c75a6e8dfff2cb06f9b6e9de7f">planAndMove</a> (const std::vector&lt; double &gt; &amp;joint_group_positions, bool approvalRequired)</td></tr>
+<tr class="memdesc:a673676c75a6e8dfff2cb06f9b6e9de7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where pose_name is set to 'given pose'.  <a href="#a673676c75a6e8dfff2cb06f9b6e9de7f">More...</a><br /></td></tr>
+<tr class="separator:a673676c75a6e8dfff2cb06f9b6e9de7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86fe3ce3555a923019b617d4a8dce37a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a86fe3ce3555a923019b617d4a8dce37a">planAndMove</a> (const std::vector&lt; double &gt; &amp;joint_group_positions)</td></tr>
+<tr class="memdesc:a86fe3ce3555a923019b617d4a8dce37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true and pose_name is set to 'given pose'.  <a href="#a86fe3ce3555a923019b617d4a8dce37a">More...</a><br /></td></tr>
+<tr class="separator:a86fe3ce3555a923019b617d4a8dce37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a801e54717d577aeeed419a816a16c409"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a801e54717d577aeeed419a816a16c409">publishPoseGoal</a> (const geometry_msgs::Pose &amp;target_pose, double duration)</td></tr>
 <tr class="memdesc:a801e54717d577aeeed419a816a16c409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishes a Pose to the command topic of the controller.  <a href="#a801e54717d577aeeed419a816a16c409">More...</a><br /></td></tr>
 <tr class="separator:a801e54717d577aeeed419a816a16c409"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -69,6 +87,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a7ab6116af6e6dc03fb56a2fc29a7547d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a7ab6116af6e6dc03fb56a2fc29a7547d">moveToCurrentTarget</a> (const std::string &amp;pose_name, bool approvalRequired)</td></tr>
+<tr class="memdesc:a7ab6116af6e6dc03fb56a2fc29a7547d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plans and moves to current target.  <a href="#a7ab6116af6e6dc03fb56a2fc29a7547d">More...</a><br /></td></tr>
+<tr class="separator:a7ab6116af6e6dc03fb56a2fc29a7547d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76f460b3fdaca2ea10eda82853807939"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a76f460b3fdaca2ea10eda82853807939">updateRobotState</a> ()</td></tr>
 <tr class="memdesc:a76f460b3fdaca2ea10eda82853807939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current robot state and stores it.  <a href="#a76f460b3fdaca2ea10eda82853807939">More...</a><br /></td></tr>
 <tr class="separator:a76f460b3fdaca2ea10eda82853807939"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,7 +181,92 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a27e1ca285f7bb4cc1296b181ed1879a9"></a>
+<a class="anchor" id="a9f5757ab2404a4e059b42ec6662bd26f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; iimoveit::RobotInterface::getJointPositions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the current joint group positions. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector with the joint positions. </dd></dl>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00117">117</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a09a4a53dcd1d77ce23c809778b21f716"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry_msgs::PoseStamped iimoveit::RobotInterface::getPose </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>end_effector_link</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the current cartesian Pose. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">end_effector_link</td><td>Name of the endeffector link, if left empty, end effector link of planning group will be used. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Current Pose as geometry_msgs::PoseStamped. </dd></dl>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00121">121</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7ab6116af6e6dc03fb56a2fc29a7547d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::moveToCurrentTarget </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>pose_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>approvalRequired</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Plans and moves to current target. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00129">129</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b98653171f3926ba94af1e0534dac21"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -170,7 +276,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
           <td>(</td>
-          <td class="paramtype">geometry_msgs::Pose &amp;&#160;</td>
+          <td class="paramtype">const geometry_msgs::Pose &amp;&#160;</td>
           <td class="paramname"><em>target_pose</em>, </td>
         </tr>
         <tr>
@@ -208,11 +314,11 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00060">60</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00061">61</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5149e1abb0d572659a9145378706e505"></a>
+<a class="anchor" id="a8217c3f797f1d62abafc6d18f32dc63d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -222,7 +328,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
           <td>(</td>
-          <td class="paramtype">geometry_msgs::Pose &amp;&#160;</td>
+          <td class="paramtype">const geometry_msgs::Pose &amp;&#160;</td>
           <td class="paramname"><em>target_pose</em>, </td>
         </tr>
         <tr>
@@ -244,13 +350,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true. </p>
+<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00078">78</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00067">67</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a578b8ecaa9b25e9bc1680cb7c3929766"></a>
+<a class="anchor" id="a48eb00a06021818553400cfd475d86ab"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -260,7 +366,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
           <td>(</td>
-          <td class="paramtype">geometry_msgs::Pose &amp;&#160;</td>
+          <td class="paramtype">const geometry_msgs::Pose &amp;&#160;</td>
           <td class="paramname"><em>target_pose</em>, </td>
         </tr>
         <tr>
@@ -282,13 +388,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where pose_name is set to 'given pose'. </p>
+<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where pose_name is set to 'given pose'. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00082">82</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00071">71</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af4b90cdeaa316e8e1d4d7e592bc203aa"></a>
+<a class="anchor" id="a1e7fddab28560082a2b90fca84522bc7"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -298,7 +404,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
           <td>(</td>
-          <td class="paramtype">geometry_msgs::Pose &amp;&#160;</td>
+          <td class="paramtype">const geometry_msgs::Pose &amp;&#160;</td>
           <td class="paramname"><em>target_pose</em></td><td>)</td>
           <td></td>
         </tr>
@@ -310,9 +416,165 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a27e1ca285f7bb4cc1296b181ed1879a9" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true and pose_name is set to 'given pose'. </p>
+<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true and pose_name is set to 'given pose'. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00086">86</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00075">75</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abd0313f384c1c1038be006b045bd6303"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>joint_group_positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>pose_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>approvalRequired</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Plans a motion to a given joint space goal. </p>
+<p>It will show the planned trajectory in RViz and, if approvalRequired is set to true, will ask for confirmation before moving to the goal. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">joint_group_positions</td><td>The joint goal. </td></tr>
+    <tr><td class="paramname">pose_name</td><td>The name of the pose that will be shown in RViz. </td></tr>
+    <tr><td class="paramname">approvalRequired</td><td>If set to true, it will only move after confirmation in RViz. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00079">79</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a88e926d0ef6e5336d3f32d86e667d06e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>joint_group_positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>pose_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00084">84</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a673676c75a6e8dfff2cb06f9b6e9de7f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>joint_group_positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>approvalRequired</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where pose_name is set to 'given pose'. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00088">88</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a86fe3ce3555a923019b617d4a8dce37a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::planAndMove </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>joint_group_positions</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overloaded <a class="el" href="classiimoveit_1_1RobotInterface.html#a8b98653171f3926ba94af1e0534dac21" title="Plans a motion to a given endeffector pose. ">planAndMove()</a>, where approvalRequired is set to true and pose_name is set to 'given pose'. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00092">92</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,13 +613,13 @@ Protected Attributes</h2></td></tr>
 <p>Publishes a Pose to the command topic of the controller. </p>
 <p>This has to be used with care, as this method does not check whether the robot is close to the starting point of the trajectory. As the command topic expects trajectory messages, the pose will be put in a trajectory containing this single pose. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">trajectory</td><td>The trajectory to publish. </td></tr>
+    <tr><td class="paramname">target_pose</td><td>The pose to publish. </td></tr>
     <tr><td class="paramname">duration</td><td>The duration value of the trajectory message. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00098">98</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00104">104</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +653,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00094">94</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00100">100</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -418,7 +680,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Gets the current robot state and stores it. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00111">111</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00125">125</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +707,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Waits for the user to click 'Next' in RViz. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00090">90</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00096">96</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +732,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The actual JointModelGroup instance. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00116">116</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00153">153</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -494,7 +756,7 @@ Protected Attributes</h2></td></tr>
 
 <p>A vector of joint names. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00120">120</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00157">157</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -518,7 +780,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The MoveGroupInterface to use MoveIt!. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00114">114</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00151">151</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -542,7 +804,7 @@ Protected Attributes</h2></td></tr>
 
 <p>This is where a MoveIt! plan will be stored. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00117">117</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00154">154</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -566,7 +828,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The NodeHandle used to publish or subscribe messages. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00111">111</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00148">148</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -590,7 +852,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The name of the planning group/joint model group to use. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00113">113</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00150">150</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -614,7 +876,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The PlanningSceneInterface to represent the planning scene. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00115">115</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00152">152</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -638,7 +900,7 @@ Protected Attributes</h2></td></tr>
 
 <p>This is where the current robot state is stored. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00121">121</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00158">158</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -662,7 +924,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The position of the status text, usually above the robot's head. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00119">119</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00156">156</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -686,7 +948,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The publisher to publish trajectory messages to the command topic of the controller. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00112">112</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00149">149</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -710,7 +972,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Tools used to visualize in RViz. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00118">118</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00155">155</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -724,7 +986,7 @@ Protected Attributes</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="http://wiki.ros.org/iimoveit">iimoveit</a><br />
 Author(s): Marcus Ebner <marcus.freiherr_ebner_von_eschenbach@stud.tu-darmstadt.de></br />
-<small>autogenerated on Sat Dec 16 2017 14:43:06</small>
+<small>autogenerated on Fri Dec 22 2017 12:47:06</small>
 </div>
 </body>
 </html>
