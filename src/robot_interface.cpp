@@ -137,7 +137,7 @@ namespace iimoveit {
       if (approvalRequired) waitForApproval();
       visual_tools_.publishText(text_pose_, "Moving to pose", rvt::WHITE, rvt::XLARGE);
       visual_tools_.trigger();
-      move_group_.move();
+      move_group_.execute(movement_plan_);
       updateRobotState();
     }
   }
