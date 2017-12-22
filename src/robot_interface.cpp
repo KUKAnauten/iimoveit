@@ -34,6 +34,16 @@
 
 /* Author: Marcus Ebner */
 
+/*
+a1: -0.753815352917
+a2: 1.1734058857
+a3: 0.112757593393
+a4: -1.68315970898
+a5: -0.736448764801
+a6: -1.34951746464
+a7: 0.104109719396
+*/
+
 #include "iimoveit/robot_interface.h"
 
 namespace iimoveit {
@@ -57,34 +67,39 @@ namespace iimoveit {
     ROS_INFO_NAMED("iimoveit", "End effector link: %s", move_group_.getEndEffectorLink().c_str());
   }
 
-  void RobotInterface::planAndMove(geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired) {
+  void RobotInterface::planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired) {
     move_group_.setPoseTarget(target_pose);
-    bool success = (bool)move_group_.plan(movement_plan_);
-    joint_names_ = movement_plan_.trajectory_.joint_trajectory.joint_names;
-    ROS_INFO_NAMED("iiwa_test", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
-    ROS_INFO_NAMED("iiwa_test", "Visualizing plan as trajectory line");
     visual_tools_.publishAxisLabeled(target_pose, pose_name);
-    visual_tools_.publishText(text_pose_, "Planning movement to given pose", rvt::WHITE, rvt::XLARGE);
-    visual_tools_.publishTrajectoryLine(movement_plan_.trajectory_, joint_model_group_);
-    visual_tools_.trigger();
-    if (approvalRequired) waitForApproval();
-    
-    visual_tools_.publishText(text_pose_, "Moving to pose", rvt::WHITE, rvt::XLARGE);
-    visual_tools_.trigger();
-    move_group_.move();
-    updateRobotState();
+    moveToCurrentTarget(pose_name, approvalRequired);
   }
 
-  void RobotInterface::planAndMove(geometry_msgs::Pose& target_pose, const std::string& pose_name) {
+  void RobotInterface::planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name) {
     planAndMove(target_pose, pose_name, true);
   }
 
-  void RobotInterface::planAndMove(geometry_msgs::Pose& target_pose, bool approvalRequired) {
+  void RobotInterface::planAndMove(const geometry_msgs::Pose& target_pose, bool approvalRequired) {
     planAndMove(target_pose, std::string("given pose"), approvalRequired);
   }
 
-  void RobotInterface::planAndMove(geometry_msgs::Pose& target_pose) {
+  void RobotInterface::planAndMove(const geometry_msgs::Pose& target_pose) {
     planAndMove(target_pose, std::string("given pose"), true);
+  }
+
+  void RobotInterface::planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name, bool approvalRequired) {
+    move_group_.setJointValueTarget(joint_group_positions);
+    moveToCurrentTarget(pose_name, approvalRequired);
+  }
+
+  void RobotInterface::planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name) {
+    planAndMove(joint_group_positions, pose_name, true);
+  }
+
+  void RobotInterface::planAndMove(const std::vector<double>& joint_group_positions, bool approvalRequired) {
+    planAndMove(joint_group_positions, std::string("given pose"), approvalRequired);
+  }
+
+  void RobotInterface::planAndMove(const std::vector<double>& joint_group_positions) {
+    planAndMove(joint_group_positions, std::string("given pose"), true);
   }
 
   void RobotInterface::waitForApproval() {
@@ -108,8 +123,36 @@ namespace iimoveit {
     trajectory_publisher_.publish(single_point_trajectory);
   }
 
+  std::vector<double> RobotInterface::getJointPositions() {
+    std::vector<double> jointPositions;
+    robot_state_.copyJointGroupPositions(joint_model_group_, jointPositions);
+    return std::move(jointPositions);
+  }
+
+  geometry_msgs::Pose RobotInterface::getPose() {
+    geometry_msgs::Pose a;
+    return a;
+  }
+
   void RobotInterface::updateRobotState() {
     robot_state_ = robot_state::RobotState(*move_group_.getCurrentState());
+  }
+
+  void RobotInterface::moveToCurrentTarget(const std::string& pose_name, bool approvalRequired) {
+    bool success = (bool)move_group_.plan(movement_plan_);
+    joint_names_ = movement_plan_.trajectory_.joint_trajectory.joint_names;
+    ROS_INFO_NAMED("iiwa_test", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
+    ROS_INFO_NAMED("iiwa_test", "Visualizing plan as trajectory line");
+    visual_tools_.publishText(text_pose_, "Planning movement to given pose", rvt::WHITE, rvt::XLARGE);
+    visual_tools_.publishTrajectoryLine(movement_plan_.trajectory_, joint_model_group_);
+    visual_tools_.trigger();
+    if (success) {
+      if (approvalRequired) waitForApproval();
+      visual_tools_.publishText(text_pose_, "Moving to pose", rvt::WHITE, rvt::XLARGE);
+      visual_tools_.trigger();
+      move_group_.move();
+      updateRobotState();
+    }
   }
   
 } // namespace iimoveit

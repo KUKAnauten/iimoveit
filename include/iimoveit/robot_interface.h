@@ -69,22 +69,46 @@ class RobotInterface {
    * @param pose_name The name of the pose that will be shown in RViz.
    * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
-  virtual void planAndMove(geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired);
+  virtual void planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired);
 
   /**
    * Overloaded planAndMove(), where approvalRequired is set to true.
    */
-  virtual void planAndMove(geometry_msgs::Pose& target_pose, const std::string& pose_name);
+  virtual void planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name);
 
   /**
    * Overloaded planAndMove(), where pose_name is set to 'given pose'.
    */
-  virtual void planAndMove(geometry_msgs::Pose& target_pose, bool approvalRequired);
+  virtual void planAndMove(const geometry_msgs::Pose& target_pose, bool approvalRequired);
 
   /**
    * Overloaded planAndMove(), where approvalRequired is set to true and pose_name is set to 'given pose'.
    */
-  virtual void planAndMove(geometry_msgs::Pose& target_pose);
+  virtual void planAndMove(const geometry_msgs::Pose& target_pose);
+
+  /**
+   * Plans a motion to a given joint space goal. It will show the planned trajectory in RViz and, if approvalRequired
+   * is set to true, will ask for confirmation before moving to the goal.
+   * @param joint_group_positions The joint goal.
+   * @param pose_name The name of the pose that will be shown in RViz.
+   * @param approvalRequired If set to true, it will only move after confirmation in RViz.
+   */
+  virtual void planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name, bool approvalRequired);
+
+  /**
+   * Overloaded planAndMove(), where approvalRequired is set to true.
+   */
+  virtual void planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name);
+
+  /**
+   * Overloaded planAndMove(), where pose_name is set to 'given pose'.
+   */
+  virtual void planAndMove(const std::vector<double>& joint_group_positions, bool approvalRequired);
+
+  /**
+   * Overloaded planAndMove(), where approvalRequired is set to true and pose_name is set to 'given pose'.
+   */
+  virtual void planAndMove(const std::vector<double>& joint_group_positions);
 
   /**
    * Waits for the user to click 'Next' in RViz.
@@ -107,6 +131,18 @@ class RobotInterface {
    */
   virtual void publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration);
 
+  /**
+   * Returns the current joint group positions.
+   * @return A vector with the joint positions.
+   */
+  std::vector<double> getJointPositions();
+
+  /**
+   * Returns the current cartesian Pose.
+   * @return Current Pose as geometry_msgs::Pose.
+   */
+  geometry_msgs::Pose getPose();
+
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
   ros::Publisher trajectory_publisher_; /**< The publisher to publish trajectory messages to the command topic of the controller. */
@@ -124,6 +160,11 @@ protected:
    * Gets the current robot state and stores it.
    */
   void updateRobotState();
+
+  /**
+   * Plans and moves to current target.
+   */
+  void moveToCurrentTarget(const std::string& pose_name, bool approvalRequired);
 };
 
 } // namespace iimoveit
