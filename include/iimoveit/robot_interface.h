@@ -139,9 +139,10 @@ class RobotInterface {
 
   /**
    * Returns the current cartesian Pose.
-   * @return Current Pose as geometry_msgs::Pose.
+   * @param 
+   * @return Current Pose as geometry_msgs::PoseStamped.
    */
-  geometry_msgs::Pose getPose();
+  geometry_msgs::PoseStamped getPose(const std::string& end_effector_link = "");
 
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */

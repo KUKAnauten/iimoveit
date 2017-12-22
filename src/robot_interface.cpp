@@ -56,6 +56,7 @@ namespace iimoveit {
         robot_state_(*move_group_.getCurrentState()) {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
+    joint_names_ = move_group_.getJointNames();
     visual_tools_.deleteAllMarkers();
     visual_tools_.loadRemoteControl();
     text_pose_ = Eigen::Affine3d::Identity();
@@ -129,9 +130,8 @@ namespace iimoveit {
     return std::move(jointPositions);
   }
 
-  geometry_msgs::Pose RobotInterface::getPose() {
-    geometry_msgs::Pose a;
-    return a;
+  geometry_msgs::PoseStamped RobotInterface::getPose(const std::string& end_effector_link) {
+    return move_group_.getCurrentPose(end_effector_link);
   }
 
   void RobotInterface::updateRobotState() {
@@ -140,7 +140,6 @@ namespace iimoveit {
 
   void RobotInterface::moveToCurrentTarget(const std::string& pose_name, bool approvalRequired) {
     bool success = (bool)move_group_.plan(movement_plan_);
-    joint_names_ = movement_plan_.trajectory_.joint_trajectory.joint_names;
     ROS_INFO_NAMED("iiwa_test", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
     ROS_INFO_NAMED("iiwa_test", "Visualizing plan as trajectory line");
     visual_tools_.publishText(text_pose_, "Planning movement to given pose", rvt::WHITE, rvt::XLARGE);
