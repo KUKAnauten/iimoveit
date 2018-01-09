@@ -40,6 +40,7 @@
 #ifndef IIMOVEIT_ROBOT_INTERFACE_H_
 #define IIMOVEIT_ROBOT_INTERFACE_H_
 
+#include <std_msgs/String.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
@@ -132,6 +133,15 @@ class RobotInterface {
   virtual void publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration);
 
   /**
+   * This callback function is called whenever one of the buttons on the SmartPad is pressed. To make it useful, a class should be
+   * derived from RobotInterface and the callback function overwritten to something useful. For the buttons to be shown on the SmartPad,
+   * they have to be configured via a launch file (like in iiwa_stack/iiwa_ros/launch/toolbar_example.launch) prior to the RosSmartServo
+   * application being launched on the iiwa!
+   * @param msg A string containing information about which button was pressed or released.
+   */
+  virtual void buttonEventCallback(const std_msgs::String::ConstPtr& msg);
+
+  /**
    * Returns the current joint group positions.
    * @return A vector with the joint positions.
    */
@@ -147,6 +157,7 @@ class RobotInterface {
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
   ros::Publisher trajectory_publisher_; /**< The publisher to publish trajectory messages to the command topic of the controller. */
+  ros::Subscriber button_subscriber_; /**< Subscribes to the button topic of the robot. */
   const std::string PLANNING_GROUP_; /**< The name of the planning group/joint model group to use. */
   moveit::planning_interface::MoveGroupInterface move_group_; /**< The MoveGroupInterface to use MoveIt!. */
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface_; /**< The PlanningSceneInterface to represent the planning scene. */

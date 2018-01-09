@@ -45,6 +45,7 @@ namespace iimoveit {
         visual_tools_(base_frame),
         robot_state_(*move_group_.getCurrentState()) {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
+    button_subscriber_ = node_handle_->subscribe<std_msgs::String>("/iiwa/state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
     joint_names_ = move_group_.getJointNames();
     visual_tools_.deleteAllMarkers();
@@ -113,6 +114,10 @@ namespace iimoveit {
     trajectory_publisher_.publish(single_point_trajectory);
   }
 
+  void RobotInterface::buttonEventCallback(const std_msgs::String::ConstPtr& msg) {
+   ROS_INFO("SmartPad button pressed: %s", msg->data.c_str());
+ }
+
   std::vector<double> RobotInterface::getJointPositions() {
     return move_group_.getCurrentJointValues();
   }
@@ -129,6 +134,7 @@ namespace iimoveit {
     bool success = (bool)move_group_.plan(movement_plan_);
     ROS_INFO_NAMED("iiwa_test", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
     ROS_INFO_NAMED("iiwa_test", "Visualizing plan as trajectory line");
+    visual_tools_.deleteAllMarkers();
     visual_tools_.publishText(text_pose_, "Planning movement to given pose", rvt::WHITE, rvt::XLARGE);
     visual_tools_.publishTrajectoryLine(movement_plan_.trajectory_, joint_model_group_);
     visual_tools_.trigger();
