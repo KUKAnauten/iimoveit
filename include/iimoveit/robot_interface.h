@@ -35,7 +35,7 @@
 /* Author: Marcus Ebner */
 
 
-//TODO publish trajectory, publish pose (cart/joint), start action, publish text
+//TODO publish trajectory, publish pose (cart/joint), start action, publish text, moveRelativeToCurrent
 
 #ifndef IIMOVEIT_ROBOT_INTERFACE_H_
 #define IIMOVEIT_ROBOT_INTERFACE_H_

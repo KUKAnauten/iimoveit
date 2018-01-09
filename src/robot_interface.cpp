@@ -60,7 +60,6 @@ namespace iimoveit {
 
   void RobotInterface::planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired) {
     move_group_.setPoseTarget(target_pose);
-    visual_tools_.publishAxisLabeled(target_pose, pose_name);
     moveToCurrentTarget(pose_name, approvalRequired);
   }
 
