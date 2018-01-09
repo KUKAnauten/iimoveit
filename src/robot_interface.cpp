@@ -48,12 +48,9 @@ namespace iimoveit {
     button_subscriber_ = node_handle_->subscribe<std_msgs::String>("/iiwa/state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
     joint_names_ = move_group_.getJointNames();
-    visual_tools_.deleteAllMarkers();
     visual_tools_.loadRemoteControl();
     text_pose_ = Eigen::Affine3d::Identity();
     text_pose_.translation().z() = 1.50; // above head of iiwa
-
-    visual_tools_.trigger();
 
     ROS_INFO_NAMED("iimoveit", "Reference frame: %s", move_group_.getPlanningFrame().c_str());
     ROS_INFO_NAMED("iimoveit", "End effector link: %s", move_group_.getEndEffectorLink().c_str());
