@@ -73,6 +73,23 @@ namespace iimoveit {
     planAndMove(target_pose, std::string("given pose"), true);
   }
 
+  void RobotInterface::planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name, bool approvalRequired) {
+    move_group_.setPoseTarget(target_pose);
+    moveToCurrentTarget(pose_name, approvalRequired);
+  }
+
+  void RobotInterface::planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name) {
+    planAndMove(target_pose, pose_name, true);
+  }
+
+  void RobotInterface::planAndMove(const geometry_msgs::PoseStamped& target_pose, bool approvalRequired) {
+    planAndMove(target_pose, std::string("given pose"), approvalRequired);
+  }
+
+  void RobotInterface::planAndMove(const geometry_msgs::PoseStamped& target_pose) {
+    planAndMove(target_pose, std::string("given pose"), true);
+  }
+
   void RobotInterface::planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name, bool approvalRequired) {
     move_group_.setJointValueTarget(joint_group_positions);
     moveToCurrentTarget(pose_name, approvalRequired);
@@ -109,6 +126,10 @@ namespace iimoveit {
     single_point_trajectory.points.push_back(trajectory_point);
 
     trajectory_publisher_.publish(single_point_trajectory);
+  }
+
+  void RobotInterface::publishPoseGoal(const geometry_msgs::PoseStamped& target_pose, double duration) {
+    RobotInterface::publishPoseGoal(target_pose.pose, duration);
   }
 
   void RobotInterface::buttonEventCallback(const std_msgs::String::ConstPtr& msg) {

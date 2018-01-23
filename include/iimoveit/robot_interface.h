@@ -88,6 +88,30 @@ class RobotInterface {
   virtual void planAndMove(const geometry_msgs::Pose& target_pose);
 
   /**
+   * Plans a motion to a given endeffector pose. It will show the planned trajectory in RViz and, if approvalRequired
+   * is set to true, will ask for confirmation before moving to the goal.
+   * @param target_pose The pose goal.
+   * @param pose_name The name of the pose that will be shown in RViz.
+   * @param approvalRequired If set to true, it will only move after confirmation in RViz.
+   */
+  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name, bool approvalRequired);
+
+  /**
+   * Overloaded planAndMove(), where approvalRequired is set to true.
+   */
+  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name);
+
+  /**
+   * Overloaded planAndMove(), where pose_name is set to 'given pose'.
+   */
+  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, bool approvalRequired);
+
+  /**
+   * Overloaded planAndMove(), where approvalRequired is set to true and pose_name is set to 'given pose'.
+   */
+  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose);
+
+  /**
    * Plans a motion to a given joint space goal. It will show the planned trajectory in RViz and, if approvalRequired
    * is set to true, will ask for confirmation before moving to the goal.
    * @param joint_group_positions The joint goal.
@@ -131,6 +155,11 @@ class RobotInterface {
    * @param duration The duration value of the trajectory message.
    */
   virtual void publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration);
+
+  /**
+   * @see publishPoseGoal
+   */
+  virtual void publishPoseGoal(const geometry_msgs::PoseStamped& target_pose, double duration);
 
   /**
    * This callback function is called whenever one of the buttons on the SmartPad is pressed. To make it useful, a class should be
