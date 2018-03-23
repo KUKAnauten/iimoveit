@@ -59,9 +59,18 @@ class RobotInterface {
    * Constructs a new RobotInterface with the given parameters
    * @param node_handle The NodeHandle used to publish and subscribe to topics.
    * @param planning_group The planning group/joint model group to plan for.
-   * @param base_frame Common base for all visual markers.
+   * @param base_pose Base pose in joint space coordinates (for tasks where robot often returns to one pose).
    */
-  RobotInterface(ros::NodeHandle* node_handle, const std::string& planning_group, const std::string& base_frame);
+  RobotInterface(ros::NodeHandle* node_handle, const std::string& planning_group, const std::vector<double>& base_pose);
+  
+  /**
+   * Constructor that assumes all joint angles as 0.0 for the base pose.
+   * @param node_handle The NodeHandle used to publish and subscribe to topics.
+   * @param planning_group The planning group/joint model group to plan for.
+   * @param !DEPRECATED! We suggest not to use this parameter at all as it might be removed in future versions. It does not have
+   *        any effect anymore.
+   */
+  RobotInterface(ros::NodeHandle* node_handle, const std::string& planning_group, const std::string& base_frame = std::string("iiwa_link_0"));
 
   /**
    * Plans a motion to a given endeffector pose. It will show the planned trajectory in RViz and, if approvalRequired
@@ -70,22 +79,13 @@ class RobotInterface {
    * @param pose_name The name of the pose that will be shown in RViz.
    * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
-  virtual void planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name, bool approvalRequired);
-
+  virtual void planAndMove(const geometry_msgs::Pose& target_pose, bool approvalRequired = true, const std::string& pose_name = std::string("given pose"));
+  
   /**
-   * Overloaded planAndMove(), where approvalRequired is set to true.
+   * Deprecated. Use the one which has approvalRequired before pose_name instead.
    */
-  virtual void planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name);
+  virtual void planAndMove(const geometry_msgs::Pose& target_pose, const std::string& pose_name = std::string("given pose"), bool approvalRequired = true);
 
-  /**
-   * Overloaded planAndMove(), where pose_name is set to 'given pose'.
-   */
-  virtual void planAndMove(const geometry_msgs::Pose& target_pose, bool approvalRequired);
-
-  /**
-   * Overloaded planAndMove(), where approvalRequired is set to true and pose_name is set to 'given pose'.
-   */
-  virtual void planAndMove(const geometry_msgs::Pose& target_pose);
 
   /**
    * Plans a motion to a given endeffector pose. It will show the planned trajectory in RViz and, if approvalRequired
@@ -94,22 +94,13 @@ class RobotInterface {
    * @param pose_name The name of the pose that will be shown in RViz.
    * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
-  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name, bool approvalRequired);
+  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, bool approvalRequired = true, const std::string& pose_name = std::string("given pose"));
 
   /**
-   * Overloaded planAndMove(), where approvalRequired is set to true.
+   * Deprecated. Use the one which has approvalRequired before pose_name instead.
    */
-  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name);
+  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, const std::string& pose_name = std::string("given pose"), bool approvalRequired = true);
 
-  /**
-   * Overloaded planAndMove(), where pose_name is set to 'given pose'.
-   */
-  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose, bool approvalRequired);
-
-  /**
-   * Overloaded planAndMove(), where approvalRequired is set to true and pose_name is set to 'given pose'.
-   */
-  virtual void planAndMove(const geometry_msgs::PoseStamped& target_pose);
 
   /**
    * Plans a motion to a given joint space goal. It will show the planned trajectory in RViz and, if approvalRequired
@@ -118,27 +109,64 @@ class RobotInterface {
    * @param pose_name The name of the pose that will be shown in RViz.
    * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
-  virtual void planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name, bool approvalRequired);
+  virtual void planAndMove(const std::vector<double>& joint_group_positions, bool approvalRequired = true, const std::string& pose_name = std::string("given pose"));
 
   /**
-   * Overloaded planAndMove(), where approvalRequired is set to true.
+   * Deprecated. Use the one which has approvalRequired before pose_name instead.
    */
-  virtual void planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name);
+  virtual void planAndMove(const std::vector<double>& joint_group_positions, const std::string& pose_name = std::string("given pose"), bool approvalRequired = true);
 
   /**
-   * Overloaded planAndMove(), where pose_name is set to 'given pose'.
+   * !UNTESTED! Plans a motion to a pose given in another coordinate frame. The coordinates of the second pose will be interpreted with the first pose as origin.
+   * This method is called by the other ones that plan in a different coordinate system like the current tool pose or the base pose.
+   * @param first_pose The first pose. The pose given with the other parameters will be concatenated onto this one.
+   * @param px The translation in x-direction of the second pose.
+   * @param py The translation in y-direction of the second pose.
+   * @param pz The translation in z-direction of the second pose.
+   * @param rx The x-component of the quaternion of the second pose.
+   * @param ry The y-component of the quaternion of the second pose.
+   * @param rz The z-component of the quaternion of the second pose.
+   * @param rw The w-component of the quaternion of the second pose.
+   * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
-  virtual void planAndMove(const std::vector<double>& joint_group_positions, bool approvalRequired);
+  virtual void planAndMoveInGivenCoordSys(const geometry_msgs::PoseStamped& first_pose, double px, double py, double pz, double rx, double ry, double rz, double rw, bool approvalRequired = true);
+  virtual void planAndMoveInToolCoordSys(const geometry_msgs::Pose& relativePose, bool approvalRequired = true);
+  virtual void planAndMoveInToolCoordSys(double x, double y, double z, double roll, double pitch, double yaw, bool approvalRequired = true);
+  virtual void planAndMoveInToolCoordSys(double x, double y, double z, bool approvalRequired = true);
+  virtual void planAndMoveInBasePoseCoordSys(const geometry_msgs::Pose& relativePose, bool approvalRequired = true);
+  virtual void planAndMoveInBasePoseCoordSys(double x, double y, double z, double roll, double pitch, double yaw, bool approvalRequired = true);
+  virtual void planAndMoveInBasePoseCoordSys(double x, double y, double z, bool approvalRequired = true);
 
   /**
-   * Overloaded planAndMove(), where approvalRequired is set to true and pose_name is set to 'given pose'.
+   * Plans a motion relative to a given pose and moves to it. The coordinates of the second pose will still be interpreted in the world frame. Only the
+   * orientation of both will be concatenated. This method is called by the ones that plan relative to the current pose or base pose.
+   * @param first_pose The first pose.
+   * @param px The translation in x-direction of the second pose.
+   * @param py The translation in y-direction of the second pose.
+   * @param pz The translation in z-direction of the second pose.
+   * @param rx The x-component of the quaternion of the second pose.
+   * @param ry The y-component of the quaternion of the second pose.
+   * @param rz The z-component of the quaternion of the second pose.
+   * @param rw The w-component of the quaternion of the second pose.
+   * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
-  virtual void planAndMove(const std::vector<double>& joint_group_positions);
+  virtual void planAndMoveRelativeToGivenPose(const geometry_msgs::PoseStamped& first_pose, double px, double py, double pz, double rx, double ry, double rz, double rw, bool approvalRequired = true);
+  virtual void planAndMoveRelativeToCurrentPose(const geometry_msgs::Pose& relativePose, bool approvalRequired = true);
+  virtual void planAndMoveRelativeToCurrentPose(double x, double y, double z, double roll, double pitch, double yaw, bool approvalRequired = true);
+  virtual void planAndMoveRelativeToCurrentPose(double x, double y, double z, bool approvalRequired = true);
+  virtual void planAndMoveRelativeToBasePose(const geometry_msgs::Pose& relativePose, bool approvalRequired = true);
+  virtual void planAndMoveRelativeToBasePose(double x, double y, double z, double roll, double pitch, double yaw, bool approvalRequired = true);
+  virtual void planAndMoveRelativeToBasePose(double x, double y, double z, bool approvalRequired = true);
+
+  virtual void planAndMoveToBasePose();
+
+  virtual void moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions = true);
 
   /**
    * Waits for the user to click 'Next' in RViz.
    */
   virtual void waitForApproval();
+
 
   /**
    * Publishes a joint trajectory to the command topic of the controller. This has to be used with care, as this method does
@@ -161,6 +189,7 @@ class RobotInterface {
    */
   virtual void publishPoseGoal(const geometry_msgs::PoseStamped& target_pose, double duration);
 
+
   /**
    * This callback function is called whenever one of the buttons on the SmartPad is pressed. To make it useful, a class should be
    * derived from RobotInterface and the callback function overwritten to something useful. For the buttons to be shown on the SmartPad,
@@ -169,6 +198,7 @@ class RobotInterface {
    * @param msg A string containing information about which button was pressed or released.
    */
   virtual void buttonEventCallback(const std_msgs::String::ConstPtr& msg);
+
 
   /**
    * Returns the current joint group positions.
@@ -183,6 +213,17 @@ class RobotInterface {
    */
   geometry_msgs::PoseStamped getPose(const std::string& end_effector_link = "");
 
+  /**
+   * Calculates the robot's endeffector pose from given joint angles, relative to robot base.
+   * @param joint_group_positions Pose in joint space
+   * @return Pose in cartesian space
+   */
+  geometry_msgs::PoseStamped poseFromJointAngles(const std::vector<double>& joint_group_positions);
+
+  geometry_msgs::PoseStamped getBasePose() const {return base_pose_;}
+  void setBasePose(const std::vector<double>& new_base_pose);
+
+
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
   ros::Publisher trajectory_publisher_; /**< The publisher to publish trajectory messages to the command topic of the controller. */
@@ -196,6 +237,8 @@ protected:
   Eigen::Affine3d text_pose_; /**< The position of the status text, usually above the robot's head. */
   std::vector<std::string> joint_names_; /**< A vector of joint names. */
   robot_state::RobotState robot_state_; /**< This is where the current robot state is stored. */
+  std::vector<double> base_pose_jointspace_; /**< Base pose in joint space coordinates. */
+  geometry_msgs::PoseStamped base_pose_; /**< Base pose in world coordinates. */
 
   /**
    * Gets the current robot state and stores it.
