@@ -35,6 +35,9 @@
 /* Author: Marcus Ebner */
 
 #include "iimoveit/robot_interface.h"
+#include <actionlib/client/simple_action_client.h>
+#include <actionlib/client/terminal_state.h>
+#include <control_msgs/FollowJointTrajectoryAction.h>
 
 namespace iimoveit {
   
@@ -200,13 +203,14 @@ namespace iimoveit {
   }
 
 
-  void RobotInterface::moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions) {
+  void RobotInterface::moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions, bool approvalRequired) {
     //for (int i = 0; i < waypoints.size(); i++) std::cout << i << ": (" << waypoints[i].position.x << ", " << waypoints[i].position.y << ", " << waypoints[i].position.z << ")" << std::endl;
     moveit_msgs::RobotTrajectory trajectory;
     double fraction = move_group_.computeCartesianPath(waypoints, eef_step, 0.0, trajectory, avoid_collisions);
     ROS_INFO_NAMED("iimoveit", "%.2f%% of the path planned into trajectory.", fraction * 100.0);
-    waitForApproval();
-    publishTrajectory(trajectory.joint_trajectory);
+    if (approvalRequired) waitForApproval();
+    runTrajectoryAction(trajectory.joint_trajectory);
+    //ros::Duration(7.0).sleep();
   }
 
 
@@ -214,9 +218,27 @@ namespace iimoveit {
     visual_tools_.prompt("Continue with moving?");
   }
 
-
   void RobotInterface::publishTrajectory(const trajectory_msgs::JointTrajectory& trajectory) {
     trajectory_publisher_.publish(trajectory);
+  }
+
+  bool RobotInterface::runTrajectoryAction(const trajectory_msgs::JointTrajectory& trajectory) {
+    actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction> action_client("PositionJointInterface_trajectory_controller/follow_joint_trajectory", true);
+    ROS_INFO("Waiting for action server to start.");
+    action_client.waitForServer();
+    ROS_INFO("Action server started, sending goal.");
+    control_msgs::FollowJointTrajectoryGoal goal;
+    goal.trajectory = trajectory;
+    //goal.joint_names = joint_names_;
+    action_client.sendGoal(goal);
+
+    bool finished_before_timeout = action_client.waitForResult(ros::Duration(30.0));
+    if (finished_before_timeout) {
+        actionlib::SimpleClientGoalState state = action_client.getState();
+        ROS_INFO("Action finished: %s",state.toString().c_str());
+    }
+    else ROS_INFO("Action did not finish before the time out.");
+    return finished_before_timeout;
   }
 
   void RobotInterface::publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration) {

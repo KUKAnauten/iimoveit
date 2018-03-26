@@ -160,7 +160,7 @@ class RobotInterface {
 
   virtual void planAndMoveToBasePose();
 
-  virtual void moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions = true);
+  virtual void moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions = true, bool approvalRequired = true);
 
   /**
    * Waits for the user to click 'Next' in RViz.
@@ -174,6 +174,13 @@ class RobotInterface {
    * @param trajectory The trajectory to publish.
    */
   virtual void publishTrajectory(const trajectory_msgs::JointTrajectory& trajectory);
+
+  /**
+   * Runs a joint trajectory action and waits for the robot to finish. This has to be used with care, as this method does
+   * not check whether the robot is close to the starting point of the trajectory.
+   * @param trajectory The trajectory.
+   */
+  virtual bool runTrajectoryAction(const trajectory_msgs::JointTrajectory& trajectory);
 
   /**
    * Publishes a Pose to the command topic of the controller. This has to be used with care, as this method does
@@ -222,6 +229,9 @@ class RobotInterface {
 
   geometry_msgs::PoseStamped getBasePose() const {return base_pose_;}
   void setBasePose(const std::vector<double>& new_base_pose);
+
+  void setPathConstraints(const moveit_msgs::Constraints& constraint) {move_group_.setPathConstraints(constraint);}
+  void clearPathConstraints() {move_group_.clearPathConstraints();}
 
 
 protected:
