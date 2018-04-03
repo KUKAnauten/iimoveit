@@ -50,6 +50,7 @@ namespace iimoveit {
         base_pose_jointspace_(base_pose) {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
     button_subscriber_ = node_handle_->subscribe<std_msgs::String>("/iiwa/state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
+    mftButton_subscriber_ = node_handle_->subscribe<std_msgs::Bool>("/iiwa/state/mftButtonState", 1, &RobotInterface::mftButtonStateCallback, this);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
     joint_names_ = move_group_.getJointNames();
     visual_tools_.loadRemoteControl();
@@ -198,19 +199,17 @@ namespace iimoveit {
   }
 
 
-  void RobotInterface::planAndMoveToBasePose() {
-    planAndMove(base_pose_jointspace_, std::string("base_pose_jointspace"), true);
+  void RobotInterface::planAndMoveToBasePose(bool approvalRequired) {
+    planAndMove(base_pose_jointspace_, std::string("base_pose_jointspace"), approvalRequired);
   }
 
 
   void RobotInterface::moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions, bool approvalRequired) {
-    //for (int i = 0; i < waypoints.size(); i++) std::cout << i << ": (" << waypoints[i].position.x << ", " << waypoints[i].position.y << ", " << waypoints[i].position.z << ")" << std::endl;
     moveit_msgs::RobotTrajectory trajectory;
     double fraction = move_group_.computeCartesianPath(waypoints, eef_step, 0.0, trajectory, avoid_collisions);
     ROS_INFO_NAMED("iimoveit", "%.2f%% of the path planned into trajectory.", fraction * 100.0);
     if (approvalRequired) waitForApproval();
     runTrajectoryAction(trajectory.joint_trajectory);
-    //ros::Duration(7.0).sleep();
   }
 
 

@@ -41,6 +41,7 @@
 #define IIMOVEIT_ROBOT_INTERFACE_H_
 
 #include <std_msgs/String.h>
+#include <std_msgs/Bool.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
@@ -158,7 +159,7 @@ class RobotInterface {
   virtual void planAndMoveRelativeToBasePose(double x, double y, double z, double roll, double pitch, double yaw, bool approvalRequired = true);
   virtual void planAndMoveRelativeToBasePose(double x, double y, double z, bool approvalRequired = true);
 
-  virtual void planAndMoveToBasePose();
+  virtual void planAndMoveToBasePose(bool approvalRequired = true);
 
   virtual void moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions = true, bool approvalRequired = true);
 
@@ -206,6 +207,11 @@ class RobotInterface {
    */
   virtual void buttonEventCallback(const std_msgs::String::ConstPtr& msg);
 
+  /**
+   * Callback function to store current button state in member variable.
+   * @param msg A Bool message containing the button state read from topic mftButtonState.
+   */
+  void mftButtonStateCallback(const std_msgs::Bool::ConstPtr& msg) { mftButtonState_ = msg->data; }
 
   /**
    * Returns the current joint group positions.
@@ -238,6 +244,7 @@ protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
   ros::Publisher trajectory_publisher_; /**< The publisher to publish trajectory messages to the command topic of the controller. */
   ros::Subscriber button_subscriber_; /**< Subscribes to the button topic of the robot. */
+  ros::Subscriber mftButton_subscriber_; /**< Subscribes to the button topic (Media Flange) of the robot. */
   const std::string PLANNING_GROUP_; /**< The name of the planning group/joint model group to use. */
   moveit::planning_interface::MoveGroupInterface move_group_; /**< The MoveGroupInterface to use MoveIt!. */
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface_; /**< The PlanningSceneInterface to represent the planning scene. */
@@ -249,6 +256,7 @@ protected:
   robot_state::RobotState robot_state_; /**< This is where the current robot state is stored. */
   std::vector<double> base_pose_jointspace_; /**< Base pose in joint space coordinates. */
   geometry_msgs::PoseStamped base_pose_; /**< Base pose in world coordinates. */
+  bool mftButtonState_; /**< State of Media Flange UserButton. */
 
   /**
    * Gets the current robot state and stores it.
