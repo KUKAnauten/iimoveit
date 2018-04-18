@@ -47,10 +47,11 @@ namespace iimoveit {
         move_group_(planning_group),
         visual_tools_("iiwa_link_0"),
         robot_state_(*move_group_.getCurrentState()),
-        base_pose_jointspace_(base_pose) {
+        base_pose_jointspace_(base_pose),
+        mfButtonState_(false) {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
-    button_subscriber_ = node_handle_->subscribe<std_msgs::String>("/iiwa/state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
-    mftButton_subscriber_ = node_handle_->subscribe<std_msgs::Bool>("/iiwa/state/mftButtonState", 1, &RobotInterface::mftButtonStateCallback, this);
+    button_subscriber_ = node_handle_->subscribe<std_msgs::String>("state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
+    mfButton_subscriber_ = node_handle_->subscribe<std_msgs::Bool>("state/MFButtonState", 1, &RobotInterface::mfButtonStateCallback, this);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
     joint_names_ = move_group_.getJointNames();
     visual_tools_.loadRemoteControl();
@@ -204,12 +205,12 @@ namespace iimoveit {
   }
 
 
-  void RobotInterface::moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions, bool approvalRequired) {
+  bool RobotInterface::moveAlongCartesianPathInWorldCoords(const std::vector<geometry_msgs::Pose>& waypoints, double eef_step, double jump_threshold, bool avoid_collisions, bool approvalRequired) {
     moveit_msgs::RobotTrajectory trajectory;
     double fraction = move_group_.computeCartesianPath(waypoints, eef_step, 0.0, trajectory, avoid_collisions);
     ROS_INFO_NAMED("iimoveit", "%.2f%% of the path planned into trajectory.", fraction * 100.0);
     if (approvalRequired) waitForApproval();
-    runTrajectoryAction(trajectory.joint_trajectory);
+    return runTrajectoryAction(trajectory.joint_trajectory);
   }
 
 
