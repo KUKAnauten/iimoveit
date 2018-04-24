@@ -197,6 +197,14 @@ class RobotInterface {
    */
   virtual void publishPoseGoal(const geometry_msgs::PoseStamped& target_pose, double duration);
 
+  /**
+   * Publishes a cartesian pose goal to the CartesianPoseLin topic. This does not work within the simulation as it uses
+   * KUKAs linear motion functionality. This also means that there will be no obstacle avoidance as it does not plan its
+   * path via MoveIt.
+   * @param target_pose The pose goal.
+   */
+  virtual void publishPoseGoalLinear(geometry_msgs::PoseStamped target_pose);
+
 
   /**
    * This callback function is called whenever one of the buttons on the SmartPad is pressed. To make it useful, a class should be
@@ -249,6 +257,7 @@ class RobotInterface {
 protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
   ros::Publisher trajectory_publisher_; /**< The publisher to publish trajectory messages to the command topic of the controller. */
+  ros::Publisher cartPoseLin_publisher_; /**< The publisher to publish cartesian pose goals for linear motions. */
   ros::Subscriber button_subscriber_; /**< Subscribes to the button topic of the robot. */
   ros::Subscriber mfButton_subscriber_; /**< Subscribes to the button topic (Media Flange) of the robot. */
   const std::string PLANNING_GROUP_; /**< The name of the planning group/joint model group to use. */

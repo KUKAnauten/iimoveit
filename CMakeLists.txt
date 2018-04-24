@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_visual_tools
   control_msgs
   actionlib
+  tf
 )
 #find_package(Eigen REQUIRED)
 #include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN_INCLUDE_DIRS})

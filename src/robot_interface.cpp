@@ -38,6 +38,7 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <control_msgs/FollowJointTrajectoryAction.h>
+#include <tf/tf.h>
 
 namespace iimoveit {
   
@@ -50,6 +51,7 @@ namespace iimoveit {
         base_pose_jointspace_(base_pose),
         mfButtonState_(false) {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
+    cartPoseLin_publisher_ = node_handle_->advertise<geometry_msgs::PoseStamped>("command/CartesianPoseLin", 1);
     button_subscriber_ = node_handle_->subscribe<std_msgs::String>("state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
     mfButton_subscriber_ = node_handle_->subscribe<std_msgs::Bool>("state/MFButtonState", 1, &RobotInterface::mfButtonStateCallback, this);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
@@ -256,6 +258,16 @@ namespace iimoveit {
 
   void RobotInterface::publishPoseGoal(const geometry_msgs::PoseStamped& target_pose, double duration) {
     RobotInterface::publishPoseGoal(target_pose.pose, duration);
+  }
+
+  void RobotInterface::publishPoseGoalLinear(geometry_msgs::PoseStamped target_pose) {
+    // We transform the pose by hand into the coordinate frame that Sunrise uses. This method is far from optimal
+    // but includes the smallest change to the other packages compared to using parameters and is quite performant
+    // compared to using tf
+    target_pose.pose.position.z -= 1.41; //TODO -> Change tool in ROSJava! -> -1.71
+    std::cout << target_pose << std::endl;
+    waitForApproval();
+    cartPoseLin_publisher_.publish(target_pose);
   }
 
 
