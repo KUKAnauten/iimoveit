@@ -233,6 +233,12 @@ class RobotInterface {
   geometry_msgs::PoseStamped getPose(const std::string& end_effector_link = "");
 
   /**
+   * Return the joint names
+   * @return A vector with the joint names
+   */
+  std::vector<std::string> getJointNames();
+
+  /**
    * Calculates the robot's endeffector pose from given joint angles, relative to robot base.
    * @param joint_group_positions Pose in joint space
    * @return Pose in cartesian space

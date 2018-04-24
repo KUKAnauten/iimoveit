@@ -248,6 +248,7 @@ namespace iimoveit {
     trajectory_point.time_from_start = ros::Duration(duration);
 
     trajectory_msgs::JointTrajectory single_point_trajectory;
+    // single_point_trajectory.header.stamp = ros::Time::now(); // MOD -> sometimes warning: "Dropping all 1 trajectory point(s), as they occur before the current time."
     single_point_trajectory.joint_names = joint_names_;
     single_point_trajectory.points.push_back(trajectory_point);
 
@@ -270,6 +271,10 @@ namespace iimoveit {
 
   geometry_msgs::PoseStamped RobotInterface::getPose(const std::string& end_effector_link) {
     return move_group_.getCurrentPose(end_effector_link);
+  }
+
+  std::vector<std::string> RobotInterface::getJointNames() {
+    return joint_names_;
   }
 
   geometry_msgs::PoseStamped RobotInterface::poseFromJointAngles(const std::vector<double>& joint_group_positions) {
