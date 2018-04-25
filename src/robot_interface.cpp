@@ -58,6 +58,8 @@ namespace iimoveit {
     text_pose_ = Eigen::Affine3d::Identity();
     text_pose_.translation().z() = 1.70; // above head of iiwa
     base_pose_ = poseFromJointAngles(base_pose_jointspace_);
+    // groupStateValidityCallbackFn = &iimoveit::RobotInterface::ikConstraint; // MOD
+    // constraint = &iimoveit::RobotInterface::ikConstraint;
 
     ROS_INFO_NAMED("iimoveit", "Reference frame: %s", move_group_.getPlanningFrame().c_str());
     ROS_INFO_NAMED("iimoveit", "End effector link: %s", move_group_.getEndEffectorLink().c_str());
@@ -258,6 +260,62 @@ namespace iimoveit {
   void RobotInterface::publishPoseGoal(const geometry_msgs::PoseStamped& target_pose, double duration) {
     RobotInterface::publishPoseGoal(target_pose.pose, duration);
   }
+
+  // MOD
+
+  void RobotInterface::publishPoseGoalConstrained(const geometry_msgs::Pose& target_pose, double duration) {
+    auto constraintMethod = [this] (robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values) {
+      // std::cout << "hi123123123" << std::endl;
+      return ikConstraint(robot_state, joint_group, joint_group_variable_values);
+    };
+    moveit::core::GroupStateValidityCallbackFn constraint = constraintMethod;
+    robot_state_.setFromIK(joint_model_group_, target_pose, 50, 0.0, constraint);
+    trajectory_msgs::JointTrajectoryPoint  trajectory_point;
+    robot_state_.copyJointGroupPositions(joint_model_group_, trajectory_point.positions);
+    trajectory_point.time_from_start = ros::Duration(duration);
+
+    trajectory_msgs::JointTrajectory single_point_trajectory;
+    // single_point_trajectory.header.stamp = ros::Time::now(); // MOD -> sometimes warning: "Dropping all 1 trajectory point(s), as they occur before the current time."
+    single_point_trajectory.joint_names = joint_names_;
+    single_point_trajectory.points.push_back(trajectory_point);
+
+    trajectory_publisher_.publish(single_point_trajectory);
+  }
+
+  void RobotInterface::publishPoseGoalConstrained(const geometry_msgs::PoseStamped& target_pose, double duration) {
+    RobotInterface::publishPoseGoal(target_pose.pose, duration);
+  }
+
+  // boost::function<bool(robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values)> groupStateValidityCallbackFn {
+  //   return true;
+  // }
+
+  bool RobotInterface::ikConstraint(robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values) {
+    // std::vector<double> currentJoints = getJointPositions();
+    // for (int i=0; i<7; i++) {
+    //   std::cout << currentJoints[i] << std::endl;  
+    // }
+    //move_group_.getCurrentState()->printStatePositions();
+    // robot_state->printStatePositions();
+    // for (auto i = 0; i < 7; ++i) std::cout << joint_group_variable_values[i] << std::endl;
+    double currentJointPosition, nextJointPosition, deviation;
+
+    for (int i = 0; i < 7; i++) {
+      currentJointPosition = robot_state->getVariablePosition(i);
+      nextJointPosition = joint_group_variable_values[i];
+      deviation = fabs(nextJointPosition - currentJointPosition);
+      std::cout << "Link " << i+1 << std::endl;
+      std::cout << currentJointPosition << std::endl;
+      std::cout << nextJointPosition << std::endl;
+      std::cout << deviation << std::endl;
+      if (deviation > 0.5) {
+        printf("Deviation %.4f in Link %d exceeded threshold.\n", deviation, i+1);  
+        return false;
+      }  
+    }
+    return true;
+  } 
+
 
 
   void RobotInterface::buttonEventCallback(const std_msgs::String::ConstPtr& msg) {

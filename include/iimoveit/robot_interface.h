@@ -46,6 +46,8 @@
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
 
+// #include <boost/function.hpp>
+
 namespace iimoveit {
 
 namespace rvt = rviz_visual_tools;
@@ -231,6 +233,25 @@ class RobotInterface {
    * @return Current Pose as geometry_msgs::PoseStamped.
    */
   geometry_msgs::PoseStamped getPose(const std::string& end_effector_link = "");
+
+  // MOD
+
+  void publishPoseGoalConstrained(const geometry_msgs::Pose& target_pose, double duration);
+
+  void publishPoseGoalConstrained(const geometry_msgs::PoseStamped& target_pose, double duration);
+
+  /**
+   * boost::function encapsulates function pointers. 
+   * When calling a member function, the first parameter passed indicates the particular object for which the function is called.
+   * Therefore, the first parameter after the open parenthesis inside the template definition must be a pointer to that particular class.
+   * 
+   */
+  // boost::function<bool(iimoveit::RobotInterface* ri_object, robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values)> groupStateValidityCallbackFn;
+  // boost::function<bool(robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values)> groupStateValidityCallbackFn;
+  // const robot_state::GroupStateValidityCallbackFn constraint;
+
+  bool ikConstraint(robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values); 
+  // static bool ikConstraint(robot_state::RobotState* robot_state, const robot_state::JointModelGroup* joint_group, const double* joint_group_variable_values);
 
   /**
    * Return the joint names
