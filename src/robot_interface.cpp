@@ -251,6 +251,7 @@ namespace iimoveit {
 
     trajectory_msgs::JointTrajectory single_point_trajectory;
     // single_point_trajectory.header.stamp = ros::Time::now(); // MOD -> sometimes warning: "Dropping all 1 trajectory point(s), as they occur before the current time."
+    single_point_trajectory.header.frame_id = "operator";
     single_point_trajectory.joint_names = joint_names_;
     single_point_trajectory.points.push_back(trajectory_point);
 
@@ -308,10 +309,10 @@ namespace iimoveit {
       std::cout << currentJointPosition << std::endl;
       std::cout << nextJointPosition << std::endl;
       std::cout << deviation << std::endl;
-      if (deviation > 0.5) {
-        printf("Deviation %.4f in Link %d exceeded threshold.\n", deviation, i+1);  
-        return false;
-      }  
+      // if (deviation > 0.5) {
+      //   printf("Deviation %.4f in Link %d exceeded threshold.\n", deviation, i+1);  
+      //   return false;
+      //}  
     }
     return true;
   } 
