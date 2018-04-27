@@ -38,10 +38,9 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <control_msgs/FollowJointTrajectoryAction.h>
-#include <tf/tf.h>
 
 namespace iimoveit {
-  
+
   RobotInterface::RobotInterface(ros::NodeHandle* node_handle, const std::string& planning_group, const std::vector<double>& base_pose)
       : PLANNING_GROUP_(planning_group),
         node_handle_(node_handle),
@@ -175,7 +174,7 @@ namespace iimoveit {
   void RobotInterface::planAndMoveRelativeToCurrentPose(const geometry_msgs::Pose& relativePose, bool approvalRequired) {
     planAndMoveRelativeToGivenPose(getPose(), relativePose.position.x, relativePose.position.y, relativePose.position.z, relativePose.orientation.x, relativePose.orientation.y, relativePose.orientation.z, relativePose.orientation.w, approvalRequired);
   }
-  
+
   void RobotInterface::planAndMoveRelativeToCurrentPose(double x, double y, double z, double roll, double pitch, double yaw, bool approvalRequired) {
     tf::Quaternion next_quaternion;
     next_quaternion.setEuler(yaw, pitch, roll);
@@ -261,13 +260,17 @@ namespace iimoveit {
   }
 
   void RobotInterface::publishPoseGoalLinear(geometry_msgs::PoseStamped target_pose) {
-    // We transform the pose by hand into the coordinate frame that Sunrise uses. This method is far from optimal
-    // but includes the smallest change to the other packages compared to using parameters and is quite performant
-    // compared to using tf
-    target_pose.pose.position.z -= 1.41; //TODO -> Change tool in ROSJava! -> -1.71
-    std::cout << target_pose << std::endl;
-    waitForApproval();
-    cartPoseLin_publisher_.publish(target_pose);
+    // If we are using the simulated robot, we'll just let him move to the goal via planAndMove
+    bool sim;
+    node_handle_->param("sim", sim, false);
+    std::cout << "Sim: " << sim << std::endl;
+    if (sim) planAndMove(target_pose, false);
+    else {
+      tf_listener_.transformPose("sunrise_world", target_pose, target_pose);
+      std::cout << target_pose << std::endl << std::endl;
+      waitForApproval();
+      cartPoseLin_publisher_.publish(target_pose);
+    }
   }
 
 
@@ -304,6 +307,7 @@ namespace iimoveit {
     return pose;
   }
 
+
   void RobotInterface::setBasePose(const std::vector<double>& new_base_pose) {
     base_pose_jointspace_ = new_base_pose;
     base_pose_ = poseFromJointAngles(new_base_pose);
@@ -329,5 +333,5 @@ namespace iimoveit {
       updateRobotState();
     }
   }
-  
+
 } // namespace iimoveit

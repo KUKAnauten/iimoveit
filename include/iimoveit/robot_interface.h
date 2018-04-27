@@ -45,6 +45,7 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
+#include <tf/tf.h>
 
 namespace iimoveit {
 
@@ -63,7 +64,7 @@ class RobotInterface {
    * @param base_pose Base pose in joint space coordinates (for tasks where robot often returns to one pose).
    */
   RobotInterface(ros::NodeHandle* node_handle, const std::string& planning_group, const std::vector<double>& base_pose);
-  
+
   /**
    * Constructor that assumes all joint angles as 0.0 for the base pose.
    * @param node_handle The NodeHandle used to publish and subscribe to topics.
@@ -81,7 +82,7 @@ class RobotInterface {
    * @param approvalRequired If set to true, it will only move after confirmation in RViz.
    */
   virtual void planAndMove(const geometry_msgs::Pose& target_pose, bool approvalRequired = true, const std::string& pose_name = std::string("given pose"));
-  
+
   /**
    * Deprecated. Use the one which has approvalRequired before pose_name instead.
    */
@@ -247,6 +248,7 @@ class RobotInterface {
    */
   geometry_msgs::PoseStamped poseFromJointAngles(const std::vector<double>& joint_group_positions);
 
+
   geometry_msgs::PoseStamped getBasePose() const {return base_pose_;}
   void setBasePose(const std::vector<double>& new_base_pose);
 
@@ -272,6 +274,7 @@ protected:
   std::vector<double> base_pose_jointspace_; /**< Base pose in joint space coordinates. */
   geometry_msgs::PoseStamped base_pose_; /**< Base pose in world coordinates. */
   bool mfButtonState_; /**< State of Media Flange UserButton. */
+  tf::TransformListener tf_listener_;
 
   /**
    * Gets the current robot state and stores it.
