@@ -51,6 +51,7 @@ namespace iimoveit {
         mfButtonState_(false) {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
     cartPoseLin_publisher_ = node_handle_->advertise<geometry_msgs::PoseStamped>("command/CartesianPoseLin", 1);
+    joint_state_subscriber_ = node_handle_->subscribe<sensor_msgs::JointState>("joint_states", 3, &RobotInterface::jointStateCallback, this);
     button_subscriber_ = node_handle_->subscribe<std_msgs::String>("state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
     mfButton_subscriber_ = node_handle_->subscribe<std_msgs::Bool>("state/MFButtonState", 1, &RobotInterface::mfButtonStateCallback, this);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
@@ -263,13 +264,33 @@ namespace iimoveit {
     // If we are using the simulated robot, we'll just let him move to the goal via planAndMove
     bool sim;
     node_handle_->param("sim", sim, false);
-    std::cout << "Sim: " << sim << std::endl;
     if (sim) planAndMove(target_pose, false);
     else {
       tf_listener_.transformPose("sunrise_world", target_pose, target_pose);
-      std::cout << target_pose << std::endl << std::endl;
-      waitForApproval();
       cartPoseLin_publisher_.publish(target_pose);
+      
+      // Wait for motion to finish
+      auto start_time = ros::Time::now();
+      double max_velocity;
+      double abs_dist = 100;
+      do {
+        // Check joint velocities
+        max_velocity = 0;
+        std::vector<double> joint_velocities = getJointVelocities();
+        for (int i = 0; i < 7; ++i) {
+          double abs_vel = std::abs(joint_velocities[i]);
+          if (abs_vel > max_velocity) max_velocity = abs_vel;
+        }
+
+        // Check distance to goal
+        geometry_msgs::PoseStamped currentPose = getPose();
+        tf_listener_.transformPose("sunrise_world", currentPose, currentPose);
+        double x_dist = currentPose.pose.position.x - target_pose.pose.position.x;
+        double y_dist = currentPose.pose.position.y - target_pose.pose.position.y;
+        double z_dist = currentPose.pose.position.z - target_pose.pose.position.z;
+        abs_dist = std::sqrt(x_dist * x_dist + y_dist * y_dist + z_dist * z_dist);
+      } while((max_velocity > 0.0001 || abs_dist > 0.03) && ros::ok());
+      ros::Duration(0.5).sleep();
     }
   }
 
@@ -280,7 +301,12 @@ namespace iimoveit {
 
 
   std::vector<double> RobotInterface::getJointPositions() {
-    return move_group_.getCurrentJointValues();
+    return joint_state_ptr_->position;
+    //return move_group_.getCurrentJointValues();
+  }
+
+  std::vector<double> RobotInterface::getJointVelocities() {
+    return joint_state_ptr_->velocity;
   }
 
   geometry_msgs::PoseStamped RobotInterface::getPose(const std::string& end_effector_link) {

@@ -207,6 +207,7 @@ class RobotInterface {
   virtual void publishPoseGoalLinear(geometry_msgs::PoseStamped target_pose);
 
 
+  void jointStateCallback(const sensor_msgs::JointState::ConstPtr& msg) { joint_state_ptr_ = msg; }
   /**
    * This callback function is called whenever one of the buttons on the SmartPad is pressed. To make it useful, a class should be
    * derived from RobotInterface and the callback function overwritten to something useful. For the buttons to be shown on the SmartPad,
@@ -229,10 +230,16 @@ class RobotInterface {
   bool getMFButtonState() { return mfButtonState_; }
 
   /**
-   * Returns the current joint group positions.
+   * Returns the current joint positions.
    * @return A vector with the joint positions.
    */
   std::vector<double> getJointPositions();
+
+  /**
+   * Returns the current joint velocities.
+   * @return A vector with the joint velocities.
+   */
+  std::vector<double> getJointVelocities();
 
   /**
    * Returns the current cartesian Pose.
@@ -260,6 +267,7 @@ protected:
   ros::NodeHandle* node_handle_; /**< The NodeHandle used to publish or subscribe messages. */
   ros::Publisher trajectory_publisher_; /**< The publisher to publish trajectory messages to the command topic of the controller. */
   ros::Publisher cartPoseLin_publisher_; /**< The publisher to publish cartesian pose goals for linear motions. */
+  ros::Subscriber joint_state_subscriber_; /**< Subscribes to the joint_states topic. */
   ros::Subscriber button_subscriber_; /**< Subscribes to the button topic of the robot. */
   ros::Subscriber mfButton_subscriber_; /**< Subscribes to the button topic (Media Flange) of the robot. */
   const std::string PLANNING_GROUP_; /**< The name of the planning group/joint model group to use. */
@@ -274,6 +282,7 @@ protected:
   std::vector<double> base_pose_jointspace_; /**< Base pose in joint space coordinates. */
   geometry_msgs::PoseStamped base_pose_; /**< Base pose in world coordinates. */
   bool mfButtonState_; /**< State of Media Flange UserButton. */
+  sensor_msgs::JointState::ConstPtr joint_state_ptr_; /**< Current joint states. */
   tf::TransformListener tf_listener_;
 
   /**
