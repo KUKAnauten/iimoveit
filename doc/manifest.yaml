@@ -11,6 +11,7 @@ depends:
 - rospy
 - rosmsg
 - iiwa_msgs
+- tf
 - control_msgs
 - actionlib
 - moveit_ros_planning_interface

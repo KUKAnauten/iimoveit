@@ -50,14 +50,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1bcb38fea4f3b97a74486b14a0627165"><td class="memItemLeft" align="right" valign="top">geometry_msgs::PoseStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a1bcb38fea4f3b97a74486b14a0627165">getBasePose</a> () const </td></tr>
 <tr class="separator:a1bcb38fea4f3b97a74486b14a0627165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f5757ab2404a4e059b42ec6662bd26f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a9f5757ab2404a4e059b42ec6662bd26f">getJointPositions</a> ()</td></tr>
-<tr class="memdesc:a9f5757ab2404a4e059b42ec6662bd26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current joint group positions.  <a href="#a9f5757ab2404a4e059b42ec6662bd26f">More...</a><br /></td></tr>
+<tr class="memdesc:a9f5757ab2404a4e059b42ec6662bd26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current joint positions.  <a href="#a9f5757ab2404a4e059b42ec6662bd26f">More...</a><br /></td></tr>
 <tr class="separator:a9f5757ab2404a4e059b42ec6662bd26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf044fcd10214be526a5349ffec3eee1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#acf044fcd10214be526a5349ffec3eee1">getJointVelocities</a> ()</td></tr>
+<tr class="memdesc:acf044fcd10214be526a5349ffec3eee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current joint velocities.  <a href="#acf044fcd10214be526a5349ffec3eee1">More...</a><br /></td></tr>
+<tr class="separator:acf044fcd10214be526a5349ffec3eee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf7735dcd6490dd48fd1473b855d454"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a5bf7735dcd6490dd48fd1473b855d454">getMFButtonState</a> ()</td></tr>
 <tr class="memdesc:a5bf7735dcd6490dd48fd1473b855d454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the green button on the Media Flange is being pressed.  <a href="#a5bf7735dcd6490dd48fd1473b855d454">More...</a><br /></td></tr>
 <tr class="separator:a5bf7735dcd6490dd48fd1473b855d454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09a4a53dcd1d77ce23c809778b21f716"><td class="memItemLeft" align="right" valign="top">geometry_msgs::PoseStamped&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a09a4a53dcd1d77ce23c809778b21f716">getPose</a> (const std::string &amp;end_effector_link=&quot;&quot;)</td></tr>
 <tr class="memdesc:a09a4a53dcd1d77ce23c809778b21f716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current cartesian Pose.  <a href="#a09a4a53dcd1d77ce23c809778b21f716">More...</a><br /></td></tr>
 <tr class="separator:a09a4a53dcd1d77ce23c809778b21f716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30719aef4319bc15fa45e2655e26f33b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a30719aef4319bc15fa45e2655e26f33b">jointStateCallback</a> (const sensor_msgs::JointState::ConstPtr &amp;msg)</td></tr>
+<tr class="separator:a30719aef4319bc15fa45e2655e26f33b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa017d8b0819864630b0800786fec3e3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#aa017d8b0819864630b0800786fec3e3c">mfButtonStateCallback</a> (const std_msgs::Bool::ConstPtr &amp;msg)</td></tr>
 <tr class="memdesc:aa017d8b0819864630b0800786fec3e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to store current button state in member variable.  <a href="#aa017d8b0819864630b0800786fec3e3c">More...</a><br /></td></tr>
 <tr class="separator:aa017d8b0819864630b0800786fec3e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +126,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a801e54717d577aeeed419a816a16c409"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d2cc06f8c68f2e9b4b93b6ced7084ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a3d2cc06f8c68f2e9b4b93b6ced7084ae">publishPoseGoal</a> (const geometry_msgs::PoseStamped &amp;target_pose, double duration)</td></tr>
 <tr class="separator:a3d2cc06f8c68f2e9b4b93b6ced7084ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19627f5a4ca483e15e00647c8edd344c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a19627f5a4ca483e15e00647c8edd344c">publishPoseGoalLinear</a> (geometry_msgs::PoseStamped target_pose)</td></tr>
+<tr class="memdesc:a19627f5a4ca483e15e00647c8edd344c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishes a cartesian pose goal to the CartesianPoseLin topic.  <a href="#a19627f5a4ca483e15e00647c8edd344c">More...</a><br /></td></tr>
+<tr class="separator:a19627f5a4ca483e15e00647c8edd344c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e841dfab9bf10c3327e1c788ff249a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a6e841dfab9bf10c3327e1c788ff249a6">publishTrajectory</a> (const trajectory_msgs::JointTrajectory &amp;trajectory)</td></tr>
 <tr class="memdesc:a6e841dfab9bf10c3327e1c788ff249a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishes a joint trajectory to the command topic of the controller.  <a href="#a6e841dfab9bf10c3327e1c788ff249a6">More...</a><br /></td></tr>
 <tr class="separator:a6e841dfab9bf10c3327e1c788ff249a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,12 +169,21 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:adf8d23545f744ea1ed18661ff89aae80"><td class="memItemLeft" align="right" valign="top">ros::Subscriber&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#adf8d23545f744ea1ed18661ff89aae80">button_subscriber_</a></td></tr>
 <tr class="memdesc:adf8d23545f744ea1ed18661ff89aae80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to the button topic of the robot.  <a href="#adf8d23545f744ea1ed18661ff89aae80">More...</a><br /></td></tr>
 <tr class="separator:adf8d23545f744ea1ed18661ff89aae80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d06a8d151ddc6bdf67bf6e9144789c"><td class="memItemLeft" align="right" valign="top">ros::Publisher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a38d06a8d151ddc6bdf67bf6e9144789c">cartPoseLin_publisher_</a></td></tr>
+<tr class="memdesc:a38d06a8d151ddc6bdf67bf6e9144789c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The publisher to publish cartesian pose goals for linear motions.  <a href="#a38d06a8d151ddc6bdf67bf6e9144789c">More...</a><br /></td></tr>
+<tr class="separator:a38d06a8d151ddc6bdf67bf6e9144789c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ee54a03929dbe2193d27f4cb1a88358"><td class="memItemLeft" align="right" valign="top">const robot_state::JointModelGroup *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a8ee54a03929dbe2193d27f4cb1a88358">joint_model_group_</a></td></tr>
 <tr class="memdesc:a8ee54a03929dbe2193d27f4cb1a88358"><td class="mdescLeft">&#160;</td><td class="mdescRight">The actual JointModelGroup instance.  <a href="#a8ee54a03929dbe2193d27f4cb1a88358">More...</a><br /></td></tr>
 <tr class="separator:a8ee54a03929dbe2193d27f4cb1a88358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f70d753435e45f6d0772f2bbbf7f4ac"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a3f70d753435e45f6d0772f2bbbf7f4ac">joint_names_</a></td></tr>
 <tr class="memdesc:a3f70d753435e45f6d0772f2bbbf7f4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">A vector of joint names.  <a href="#a3f70d753435e45f6d0772f2bbbf7f4ac">More...</a><br /></td></tr>
 <tr class="separator:a3f70d753435e45f6d0772f2bbbf7f4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f07d652538a7bb7374384c3afc2f482"><td class="memItemLeft" align="right" valign="top">sensor_msgs::JointState::ConstPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a2f07d652538a7bb7374384c3afc2f482">joint_state_ptr_</a></td></tr>
+<tr class="memdesc:a2f07d652538a7bb7374384c3afc2f482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current joint states.  <a href="#a2f07d652538a7bb7374384c3afc2f482">More...</a><br /></td></tr>
+<tr class="separator:a2f07d652538a7bb7374384c3afc2f482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70fa938dfe867bd0695e7396295d87c9"><td class="memItemLeft" align="right" valign="top">ros::Subscriber&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a70fa938dfe867bd0695e7396295d87c9">joint_state_subscriber_</a></td></tr>
+<tr class="memdesc:a70fa938dfe867bd0695e7396295d87c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to the joint_states topic.  <a href="#a70fa938dfe867bd0695e7396295d87c9">More...</a><br /></td></tr>
+<tr class="separator:a70fa938dfe867bd0695e7396295d87c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9583136d2e3dfed203fc76d23a13c788"><td class="memItemLeft" align="right" valign="top">ros::Subscriber&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a9583136d2e3dfed203fc76d23a13c788">mfButton_subscriber_</a></td></tr>
 <tr class="memdesc:a9583136d2e3dfed203fc76d23a13c788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to the button topic (Media Flange) of the robot.  <a href="#a9583136d2e3dfed203fc76d23a13c788">More...</a><br /></td></tr>
 <tr class="separator:a9583136d2e3dfed203fc76d23a13c788"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,6 +211,8 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a5eae1fbb5aa13529566cfe6e947afa28"><td class="memItemLeft" align="right" valign="top">Eigen::Affine3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a5eae1fbb5aa13529566cfe6e947afa28">text_pose_</a></td></tr>
 <tr class="memdesc:a5eae1fbb5aa13529566cfe6e947afa28"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of the status text, usually above the robot's head.  <a href="#a5eae1fbb5aa13529566cfe6e947afa28">More...</a><br /></td></tr>
 <tr class="separator:a5eae1fbb5aa13529566cfe6e947afa28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30258a6b4d0a71f72b78535a5b3b15ba"><td class="memItemLeft" align="right" valign="top">tf::TransformListener&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a30258a6b4d0a71f72b78535a5b3b15ba">tf_listener_</a></td></tr>
+<tr class="separator:a30258a6b4d0a71f72b78535a5b3b15ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a05bf33f126871cab9668a9900fb47e"><td class="memItemLeft" align="right" valign="top">ros::Publisher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiimoveit_1_1RobotInterface.html#a4a05bf33f126871cab9668a9900fb47e">trajectory_publisher_</a></td></tr>
 <tr class="memdesc:a4a05bf33f126871cab9668a9900fb47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The publisher to publish trajectory messages to the command topic of the controller.  <a href="#a4a05bf33f126871cab9668a9900fb47e">More...</a><br /></td></tr>
 <tr class="separator:a4a05bf33f126871cab9668a9900fb47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,7 +224,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Provides an easy to use interface to control the iiwa in combination with MoveIt!. </p>
 <p>All public methods are virtual, so that derived classes can overwrite them in case they need modified versions. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00057">57</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00058">58</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2f5764dc6cea9f194bb0cfaf34fcf14b"></a>
 <div class="memitem">
@@ -291,7 +310,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00066">66</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00068">68</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -326,7 +345,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00262">262</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00298">298</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +370,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00246">246</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00263">263</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -376,7 +395,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00242">242</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00259">259</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -393,10 +412,30 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the current joint group positions. </p>
+<p>Returns the current joint positions. </p>
 <dl class="section return"><dt>Returns</dt><dd>A vector with the joint positions. </dd></dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00267">267</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00303">303</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acf044fcd10214be526a5349ffec3eee1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; iimoveit::RobotInterface::getJointVelocities </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the current joint velocities. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector with the joint velocities. </dd></dl>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00308">308</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +463,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns true if the green button on the Media Flange is being pressed. </p>
 <dl class="section return"><dt>Returns</dt><dd>The Media Flange user button state. </dd></dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00220">220</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00230">230</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -451,7 +490,33 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Current Pose as geometry_msgs::PoseStamped. </dd></dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00271">271</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00312">312</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a30719aef4319bc15fa45e2655e26f33b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::jointStateCallback </td>
+          <td>(</td>
+          <td class="paramtype">const sensor_msgs::JointState::ConstPtr &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00210">210</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -485,7 +550,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00214">214</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00224">224</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -539,7 +604,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00208">208</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00210">210</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +642,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Plans and moves to current target. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00304">304</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00346">346</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -629,7 +694,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00075">75</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00077">77</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -674,7 +739,7 @@ Protected Attributes</h2></td></tr>
 <p>Deprecated. </p>
 <p>Use the one which has approvalRequired before pose_name instead. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00070">70</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00072">72</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +791,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00086">86</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00088">88</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -771,7 +836,7 @@ Protected Attributes</h2></td></tr>
 <p>Deprecated. </p>
 <p>Use the one which has approvalRequired before pose_name instead. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00081">81</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00083">83</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -823,7 +888,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00097">97</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00099">99</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -868,7 +933,7 @@ Protected Attributes</h2></td></tr>
 <p>Deprecated. </p>
 <p>Use the one which has approvalRequired before pose_name instead. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00092">92</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00094">94</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -904,7 +969,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00140">140</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00142">142</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -970,7 +1035,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00144">144</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00146">146</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1018,7 +1083,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00150">150</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00152">152</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1112,7 +1177,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00103">103</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00105">105</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1148,7 +1213,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00125">125</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00127">127</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1214,7 +1279,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00129">129</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00131">131</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1262,7 +1327,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00135">135</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00137">137</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1298,7 +1363,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00188">188</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00190">190</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1364,7 +1429,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00192">192</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00194">194</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1412,7 +1477,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00198">198</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00200">200</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1448,7 +1513,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00173">173</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00175">175</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1514,7 +1579,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00177">177</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00179">179</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1562,7 +1627,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00183">183</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00185">185</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1656,7 +1721,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00155">155</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00157">157</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1682,7 +1747,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00203">203</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00205">205</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1709,7 +1774,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pose in cartesian space </dd></dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00275">275</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00316">316</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1754,7 +1819,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00244">244</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00246">246</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1791,7 +1856,41 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classiimoveit_1_1RobotInterface.html#a801e54717d577aeeed419a816a16c409" title="Publishes a Pose to the command topic of the controller. ">publishPoseGoal</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00257">257</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00259">259</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a19627f5a4ca483e15e00647c8edd344c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iimoveit::RobotInterface::publishPoseGoalLinear </td>
+          <td>(</td>
+          <td class="paramtype">geometry_msgs::PoseStamped&#160;</td>
+          <td class="paramname"><em>target_pose</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Publishes a cartesian pose goal to the CartesianPoseLin topic. </p>
+<p>This does not work within the simulation as it uses KUKAs linear motion functionality. This also means that there will be no obstacle avoidance as it does not plan its path via MoveIt. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target_pose</td><td>The pose goal. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00263">263</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1825,7 +1924,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00221">221</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00223">223</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1859,7 +1958,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00225">225</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00227">227</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1877,7 +1976,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00295">295</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00337">337</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1903,7 +2002,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00245">245</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00262">262</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -1930,7 +2029,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Gets the current robot state and stores it. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00300">300</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00342">342</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1957,7 +2056,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Waits for the user to click 'Next' in RViz. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00217">217</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8cpp_source.html#l00219">219</a> of file <a class="el" href="robot__interface_8cpp_source.html">robot_interface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1982,7 +2081,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Base pose in world coordinates. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00264">264</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00283">283</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2006,7 +2105,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Base pose in joint space coordinates. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00263">263</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00282">282</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2030,7 +2129,31 @@ Protected Attributes</h2></td></tr>
 
 <p>Subscribes to the button topic of the robot. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00252">252</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00271">271</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a38d06a8d151ddc6bdf67bf6e9144789c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ros::Publisher iimoveit::RobotInterface::cartPoseLin_publisher_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The publisher to publish cartesian pose goals for linear motions. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00269">269</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2054,7 +2177,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The actual JointModelGroup instance. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00257">257</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00276">276</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2078,7 +2201,55 @@ Protected Attributes</h2></td></tr>
 
 <p>A vector of joint names. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00261">261</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00280">280</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2f07d652538a7bb7374384c3afc2f482"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sensor_msgs::JointState::ConstPtr iimoveit::RobotInterface::joint_state_ptr_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Current joint states. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00285">285</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a70fa938dfe867bd0695e7396295d87c9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ros::Subscriber iimoveit::RobotInterface::joint_state_subscriber_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribes to the joint_states topic. </p>
+
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00270">270</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2102,7 +2273,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Subscribes to the button topic (Media Flange) of the robot. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00253">253</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00272">272</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2126,7 +2297,7 @@ Protected Attributes</h2></td></tr>
 
 <p>State of Media Flange UserButton. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00265">265</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00284">284</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2150,7 +2321,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The MoveGroupInterface to use MoveIt!. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00255">255</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00274">274</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2174,7 +2345,7 @@ Protected Attributes</h2></td></tr>
 
 <p>This is where a MoveIt! plan will be stored. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00258">258</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00277">277</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2198,7 +2369,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The NodeHandle used to publish or subscribe messages. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00250">250</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00267">267</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2222,7 +2393,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The name of the planning group/joint model group to use. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00254">254</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00273">273</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2246,7 +2417,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The PlanningSceneInterface to represent the planning scene. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00256">256</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00275">275</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2270,7 +2441,7 @@ Protected Attributes</h2></td></tr>
 
 <p>This is where the current robot state is stored. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00262">262</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00281">281</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2294,7 +2465,29 @@ Protected Attributes</h2></td></tr>
 
 <p>The position of the status text, usually above the robot's head. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00260">260</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00279">279</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a30258a6b4d0a71f72b78535a5b3b15ba"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tf::TransformListener iimoveit::RobotInterface::tf_listener_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00286">286</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2318,7 +2511,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The publisher to publish trajectory messages to the command topic of the controller. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00251">251</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00268">268</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2342,7 +2535,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Tools used to visualize in RViz. </p>
 
-<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00259">259</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
+<p>Definition at line <a class="el" href="robot__interface_8h_source.html#l00278">278</a> of file <a class="el" href="robot__interface_8h_source.html">robot_interface.h</a>.</p>
 
 </div>
 </div>
@@ -2356,7 +2549,7 @@ Protected Attributes</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="http://wiki.ros.org/iimoveit">iimoveit</a><br />
 Author(s): Marcus Ebner <marcus.freiherr_ebner_von_eschenbach@stud.tu-darmstadt.de></br />
-<small>autogenerated on Wed Apr 18 2018 18:45:55</small>
+<small>autogenerated on Wed May 2 2018 11:30:36</small>
 </div>
 </body>
 </html>
