@@ -266,7 +266,9 @@ namespace iimoveit {
     node_handle_->param("sim", sim, false);
     if (sim) planAndMove(target_pose, false);
     else {
+      ros::Duration(0.4).sleep();
       tf_listener_.transformPose("sunrise_world", target_pose, target_pose);
+      target_pose.header.stamp = ros::Time::now();
       cartPoseLin_publisher_.publish(target_pose);
       
       // Wait for motion to finish
@@ -290,7 +292,7 @@ namespace iimoveit {
         double z_dist = currentPose.pose.position.z - target_pose.pose.position.z;
         abs_dist = std::sqrt(x_dist * x_dist + y_dist * y_dist + z_dist * z_dist);
       } while((max_velocity > 0.0001 || abs_dist > 0.03) && ros::ok());
-      ros::Duration(0.5).sleep();
+      ros::Duration(0.4).sleep();
     }
   }
 
