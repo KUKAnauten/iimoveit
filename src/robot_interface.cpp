@@ -272,18 +272,8 @@ namespace iimoveit {
       cartPoseLin_publisher_.publish(target_pose);
       
       // Wait for motion to finish
-      auto start_time = ros::Time::now();
-      double max_velocity;
       double abs_dist = 100;
       do {
-        // Check joint velocities
-        max_velocity = 0;
-        std::vector<double> joint_velocities = getJointVelocities();
-        for (int i = 0; i < 7; ++i) {
-          double abs_vel = std::abs(joint_velocities[i]);
-          if (abs_vel > max_velocity) max_velocity = abs_vel;
-        }
-
         // Check distance to goal
         geometry_msgs::PoseStamped currentPose = getPose();
         tf_listener_.transformPose("sunrise_world", currentPose, currentPose);
@@ -291,8 +281,7 @@ namespace iimoveit {
         double y_dist = currentPose.pose.position.y - target_pose.pose.position.y;
         double z_dist = currentPose.pose.position.z - target_pose.pose.position.z;
         abs_dist = std::sqrt(x_dist * x_dist + y_dist * y_dist + z_dist * z_dist);
-      } while((max_velocity > 0.0001 || abs_dist > 0.03) && ros::ok());
-      ros::Duration(0.4).sleep();
+      } while((isMoving() || abs_dist > 0.03) && ros::ok());
     }
   }
 
@@ -309,6 +298,16 @@ namespace iimoveit {
 
   std::vector<double> RobotInterface::getJointVelocities() {
     return joint_state_ptr_->velocity;
+  }
+
+  bool RobotInterface::isMoving(double limit) {
+        std::vector<double> joint_velocities = getJointVelocities();
+        double max_velocity = std::abs(joint_velocities[0]);
+        for (int i = 1; i < 7; ++i) {
+          double abs_vel = std::abs(joint_velocities[i]);
+          if (abs_vel > max_velocity) max_velocity = abs_vel;
+        }
+        return max_velocity > limit;
   }
 
   geometry_msgs::PoseStamped RobotInterface::getPose(const std::string& end_effector_link) {
@@ -346,6 +345,8 @@ namespace iimoveit {
   }
 
   void RobotInterface::moveToCurrentTarget(const std::string& pose_name, bool approvalRequired) {
+    // Wait for robot to finish moving
+    while (isMoving()) {}
     bool success = (bool)move_group_.plan(movement_plan_);
     ROS_INFO_NAMED("iimoveit", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
     ROS_INFO_NAMED("iimoveit", "Visualizing plan as trajectory line");

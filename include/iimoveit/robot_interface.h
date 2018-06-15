@@ -242,6 +242,13 @@ class RobotInterface {
   std::vector<double> getJointVelocities();
 
   /**
+   * Checks, if any of the robot's joint velocities is above a given value.
+   * @param limit The value to compare with.
+   * @return True, if any joint velocity is larger than limit.
+   */
+  bool isMoving(double limit = 0.001);
+
+  /**
    * Returns the current cartesian Pose.
    * @param end_effector_link Name of the endeffector link, if left empty, end effector link of planning group will be used.
    * @return Current Pose as geometry_msgs::PoseStamped.
