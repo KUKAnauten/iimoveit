@@ -212,7 +212,10 @@ namespace iimoveit {
     double fraction = move_group_.computeCartesianPath(waypoints, eef_step, 0.0, trajectory, avoid_collisions);
     ROS_INFO_NAMED("iimoveit", "%.2f%% of the path planned into trajectory.", fraction * 100.0);
     if (approvalRequired) waitForApproval();
-    return runTrajectoryAction(trajectory.joint_trajectory);
+    bool status = runTrajectoryAction(trajectory.joint_trajectory);
+    // Wait for robot to finish moving
+    while (isMoving()) {}
+    return status;
   }
 
 
@@ -345,8 +348,6 @@ namespace iimoveit {
   }
 
   void RobotInterface::moveToCurrentTarget(const std::string& pose_name, bool approvalRequired) {
-    // Wait for robot to finish moving
-    while (isMoving()) {}
     bool success = (bool)move_group_.plan(movement_plan_);
     ROS_INFO_NAMED("iimoveit", "Visualizing plan to %s %s", pose_name.c_str(), success ? "" : "FAILED");
     ROS_INFO_NAMED("iimoveit", "Visualizing plan as trajectory line");
@@ -361,6 +362,8 @@ namespace iimoveit {
       move_group_.execute(movement_plan_);
       updateRobotState();
     }
+    // Wait for robot to finish moving
+    while (isMoving()) {}
   }
 
 } // namespace iimoveit
