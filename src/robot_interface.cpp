@@ -304,13 +304,18 @@ namespace iimoveit {
   }
 
   bool RobotInterface::isMoving(double limit) {
-        std::vector<double> joint_velocities = getJointVelocities();
-        double max_velocity = std::abs(joint_velocities[0]);
-        for (int i = 1; i < 7; ++i) {
-          double abs_vel = std::abs(joint_velocities[i]);
-          if (abs_vel > max_velocity) max_velocity = abs_vel;
-        }
-        return max_velocity > limit;
+    bool sim;
+    node_handle_->param("sim", sim, false);
+    if (sim) return false;
+    else {
+      std::vector<double> joint_velocities = getJointVelocities();
+      double max_velocity = std::abs(joint_velocities[0]);
+      for (int i = 1; i < 7; ++i) {
+        double abs_vel = std::abs(joint_velocities[i]);
+        if (abs_vel > max_velocity) max_velocity = abs_vel;
+      }
+      return max_velocity > limit;
+    }
   }
 
   geometry_msgs::PoseStamped RobotInterface::getPose(const std::string& end_effector_link) {
