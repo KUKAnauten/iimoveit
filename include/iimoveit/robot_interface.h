@@ -290,6 +290,7 @@ protected:
   std::vector<double> base_pose_jointspace_; /**< Base pose in joint space coordinates. */
   geometry_msgs::PoseStamped base_pose_; /**< Base pose in world coordinates. */
   bool mfButtonState_; /**< State of Media Flange UserButton. */
+  ros::Publisher time_publisher_; 
 
   /**
    * Gets the current robot state and stores it.

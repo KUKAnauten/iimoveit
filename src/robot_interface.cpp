@@ -38,6 +38,8 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <control_msgs/FollowJointTrajectoryAction.h>
+#include <std_msgs/Time.h>
+#include <std_msgs/UInt64.h>
 
 namespace iimoveit {
   
@@ -52,6 +54,7 @@ namespace iimoveit {
     trajectory_publisher_ = node_handle_->advertise<trajectory_msgs::JointTrajectory>("PositionJointInterface_trajectory_controller/command", 1);
     button_subscriber_ = node_handle_->subscribe<std_msgs::String>("state/buttonEvent", 10, &RobotInterface::buttonEventCallback, this);
     mfButton_subscriber_ = node_handle_->subscribe<std_msgs::Bool>("state/MFButtonState", 1, &RobotInterface::mfButtonStateCallback, this);
+    time_publisher_ = node_handle_->advertise<std_msgs::UInt64>("timeSendingCommand", 1);
     joint_model_group_ = move_group_.getCurrentState()->getJointModelGroup(PLANNING_GROUP_);
     joint_names_ = move_group_.getJointNames();
     visual_tools_.loadRemoteControl();
@@ -221,6 +224,11 @@ namespace iimoveit {
   }
 
   void RobotInterface::publishTrajectory(const trajectory_msgs::JointTrajectory& trajectory) {
+    std_msgs::UInt64 sending_time;
+    sending_time.data = ros::WallTime::now().toNSec();
+    //std::cout << ros::WallTime::now().toNSec() << std::endl;
+    time_publisher_.publish(sending_time);
+
     trajectory_publisher_.publish(trajectory);
   }
 
@@ -244,7 +252,19 @@ namespace iimoveit {
   }
 
   void RobotInterface::publishPoseGoal(const geometry_msgs::Pose& target_pose, double duration) {
+    // std::cout << "x: " << target_pose.position.x << std::endl;
+    // std::cout << "y: " << target_pose.position.y << std::endl;
+    // std::cout << "z: " << target_pose.position.z << std::endl;
+    // std::cout << "qx: " << target_pose.orientation.x << std::endl;
+    // std::cout << "qy: " << target_pose.orientation.y << std::endl;
+    // std::cout << "qz: " << target_pose.orientation.z << std::endl;
+    // std::cout << "qw: " << target_pose.orientation.w << std::endl;
+    // std::cout << std::endl;
+    //ros::WallTime beforeIK = ros::WallTime::now();
     robot_state_.setFromIK(joint_model_group_, target_pose);
+    //ros::WallDuration timeDelta = ros::WallTime::now() - beforeIK;
+    //uint64_t timeDeltaNSec = timeDelta.toNSec();
+    //std::cout << timeDelta << std::endl;
     trajectory_msgs::JointTrajectoryPoint  trajectory_point;
     robot_state_.copyJointGroupPositions(joint_model_group_, trajectory_point.positions);
     trajectory_point.time_from_start = ros::Duration(duration);
@@ -255,6 +275,14 @@ namespace iimoveit {
     single_point_trajectory.joint_names = joint_names_;
     single_point_trajectory.points.push_back(trajectory_point);
 
+    //std_msgs::Time sending_time;
+    //sending_time.data = ros::WallTime::now();
+
+    // std_msgs::UInt64 sending_time;
+    // sending_time.data = ros::WallTime::now().toNSec();
+    // //std::cout << ros::WallTime::now().toNSec() << std::endl;
+    // time_publisher_.publish(sending_time);
+    
     trajectory_publisher_.publish(single_point_trajectory);
   }
 
